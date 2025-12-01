@@ -66,11 +66,7 @@ dev.off()
 ###################################################################################
 
 ###################################################################################
-## Figure 6. Case study 2b
-###################################################################################
-
-###################################################################################
-## Figure 7. Case study 3
+## Figure 6. Case study 3
 set.seed(seed)
 
 ### Let's try with the full morphospace
@@ -91,7 +87,7 @@ for (i in 1:sims){
 
 
 ## Plot
-png("../Figures/Fig_7a.png", res = 50, height = 1500, width = 1500)
+png("../Figures/Fig_6a.png", res = 50, height = 1500, width = 1500)
 layout(mat)
 for (i in 1:sims){
 	plot(AtoMult_G1$Shapes[[i]], type = "l", lwd = 1.5, cex.main = 2, xlab = "", ylab = "", bty = "n", main = paste0("t = ",i," / S = ", pdist_G1[i,1]))
@@ -114,7 +110,7 @@ for (i in 1:sims){
 
 
 ## Plot
-png("../Figures/SI_figures/Fig_7b.png", res = 50, height = 1500, width = 1500)
+png("../Figures/SI_figures/Fig_6b.png", res = 50, height = 1500, width = 1500)
 layout(mat)
 for (i in 1:sims){
 	plot(AtoMult_G2$Shapes[[i]], type = "l", lwd = 1.5, cex.main = 2, xlab = "", ylab = "", bty = "n", main = paste0("t = ",i," / S = ", pdist_G2[i,1]))
@@ -138,7 +134,7 @@ for (i in 1:sims){
 
 
 ## Plot
-png("../Figures/SI_figures/Fig_7c.png", res = 50, height = 1500, width = 1500)
+png("../Figures/SI_figures/Fig_6c.png", res = 50, height = 1500, width = 1500)
 layout(mat)
 for (i in 1:sims){
 	plot(AtoMult_G9$Shapes[[i]], type = "l", lwd = 1.5, cex.main = 2, xlab = "", ylab = "", bty = "n", main = paste0("t = ",i," / S = ", pdist_G9[i,1]))
@@ -162,7 +158,7 @@ for (i in 1:sims){
 
 
 ## Plot
-png("../Figures/SI_figures/Fig_7d.png", res = 50, height = 1500, width = 1500)
+png("../Figures/SI_figures/Fig_6d.png", res = 50, height = 1500, width = 1500)
 layout(mat)
 for (i in 1:sims){
 	plot(AtoMult_G18$Shapes[[i]], type = "l", lwd = 1.5, cex.main = 2, xlab = "", ylab = "", bty = "n", main = paste0("t = ",i," / S = ", pdist_G18[i,1]))
@@ -173,14 +169,14 @@ dev.off()
 ###################################################################################
 
 ###################################################################################
-## Figure 8. Case study 4
+## Figure 7. Case study 4
 ###################################################################################
 set.seed(seed)
 
 Free <- simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = 1, target = nrow(amp_pha_mat), method = "Free", sim = sims, npts = npts, only.shapes = F, a = 0.2, e = 0.05, f = 100, max.attempts = 500)
 
 ## Plot
-png("../Figures/Fig_8.png", res = 50, height = 1500, width = 1500)
+png("../Figures/Fig_7.png", res = 50, height = 1500, width = 1500)
 layout(mat)
 for (i in 1:sims){
 	plot(Free$Shapes[[i]], type = "l", lwd = 1.5, cex.main = 2, xlab = "", ylab = "", bty = "n", main = paste0("t = ",i))
