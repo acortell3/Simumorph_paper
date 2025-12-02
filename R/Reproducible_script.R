@@ -119,6 +119,7 @@ for (i in 1:sims){
 plot(unlist(AtoBc$P.distances), type = "l", lwd = 3, cex.main = 2, cex.lab = 2.2, mgp = c(1.8,0.7,0), col = "sienna4", main = "Procrustes distances", xlab = "Time", ylab = "Dist", bty = "n")
 dev.off()
 ###################################################################################
+
 ###################################################################################
 ## Figure 6. Case study 3
 set.seed(seed)
@@ -241,6 +242,124 @@ for (i in 1:sims){
 plot(unlist(Free$P.distances), type = "l", lwd = 3, cex.main = 2, cex.lab = 2.2, mgp = c(1.8,0.7,0), col = "lightsalmon4", main = "Procrustes distances", xlab = "Time", ylab = "Dist", bty = "n")
 dev.off()
 
+###################################################################################
+## Figure Additional SI. Case study 3 without init in target
+set.seed(seed)
+
+### Let's try with the full morphospace
+target_names <- rownames(amp_pha_mat)[!grepl("G1.1",rownames(amp_pha_mat))]
+targets_multi <- c(1:length(target_names))
+
+c_a <- 3
+c_f <- 50
+
+
+AtoMult_G1 <- simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = which(rownames(amp_pha_mat) == "G1.1_m_G1.1"), target = targets_multi, method = "AtoMult", sim = sims, npts = npts, only.shapes = F, a = c_a, e = 0.05, f = c_f)
+
+## Create vector with minimum procrustes distances and their 
+pdist_G1 <- data.frame("target" = character(),
+		       "distance" = numeric())
+
+for (i in 1:sims){
+	pdist_G1[i,1] <- target_names[which.min(AtoMult_G1$P.distances[,i])]
+	pdist_G1[i,2] <- min(AtoMult_G1$P.distances[,i])
+}
+
+
+## Plot
+png("../Figures/SI_figures/Add_SIa.png", res = 50, height = 1500, width = 1500)
+layout(mat)
+for (i in 1:sims){
+	plot(AtoMult_G1$Shapes[[i]], type = "l", lwd = 1.5, cex.main = 2, xlab = "", ylab = "", bty = "n", main = paste0("t = ",i," / S = ", pdist_G1[i,1]))
+	polygon(AtoMult_G1$Shapes[[i]], col = adjustcolor("slategray3", alpha = 0.85))
+}
+plot(pdist_G1$distance, type = "l", lwd = 3, cex.main = 2, cex.lab = 2.2, mgp = c(1.8,0.7,0), col = "slategrey", main = "Procrustes distances", xlab = "Time", ylab = "Dist", bty = "n")
+dev.off()
+
+## Go for G2
+target_names <- rownames(amp_pha_mat)[!grepl("G2",rownames(amp_pha_mat))]
+targets_multi <- c(1:length(target_names))
+
+AtoMult_G2 <- simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = which(rownames(amp_pha_mat) == "G2_m_G2"), target = targets_multi, method = "AtoMult", sim = sims, npts = npts, only.shapes = F, a = c_a, e = 0.05, f = c_f)
+
+## Create vector with minimum procrustes distances and their 
+pdist_G2 <- data.frame("target" = character(),
+		       "distance" = numeric())
+
+for (i in 1:sims){
+	pdist_G2[i,1] <- target_names[which.min(AtoMult_G2$P.distances[,i])]
+	pdist_G2[i,2] <- min(AtoMult_G2$P.distances[,i])
+}
+
+
+## Plot
+png("../Figures/SI_figures/Add_SIb.png", res = 50, height = 1500, width = 1500)
+layout(mat)
+for (i in 1:sims){
+	plot(AtoMult_G2$Shapes[[i]], type = "l", lwd = 1.5, cex.main = 2, xlab = "", ylab = "", bty = "n", main = paste0("t = ",i," / S = ", pdist_G2[i,1]))
+	polygon(AtoMult_G2$Shapes[[i]], col = adjustcolor("slategray3", alpha = 0.85))
+}
+plot(pdist_G2$distance, type = "l", lwd = 3, cex.main = 2, cex.lab = 2.2, mgp = c(1.8,0.7,0), col = "slategrey", main = "Procrustes distances", xlab = "Time", ylab = "Dist", bty = "n")
+dev.off()
+
+
+### Now G9
+target_names <- rownames(amp_pha_mat)[!grepl("G9",rownames(amp_pha_mat))]
+targets_multi <- c(1:length(target_names))
+
+AtoMult_G9 <- simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = which(rownames(amp_pha_mat) == "G9_m_G9"), target = targets_multi, method = "AtoMult", sim = sims, npts = npts, only.shapes = F, a = c_a, e = 0.05, f = c_f)
+
+## Create vector with minimum procrustes distances and their 
+pdist_G9 <- data.frame("target" = character(),
+		       "distance" = numeric())
+
+for (i in 1:sims){
+	pdist_G9[i,1] <- target_names[which.min(AtoMult_G9$P.distances[,i])]
+	pdist_G9[i,2] <- min(AtoMult_G9$P.distances[,i])
+}
+
+
+## Plot
+png("../Figures/SI_figures/Add_SIc.png", res = 50, height = 1500, width = 1500)
+layout(mat)
+for (i in 1:sims){
+	plot(AtoMult_G9$Shapes[[i]], type = "l", lwd = 1.5, cex.main = 2, xlab = "", ylab = "", bty = "n", main = paste0("t = ",i," / S = ", pdist_G9[i,1]))
+	polygon(AtoMult_G9$Shapes[[i]], col = adjustcolor("slategray3", alpha = 0.85))
+}
+plot(pdist_G9$distance, type = "l", lwd = 3, cex.main = 2, cex.lab = 2.2, mgp = c(1.8,0.7,0), col = "slategrey", main = "Procrustes distances", xlab = "Time", ylab = "Dist", bty = "n")
+dev.off()
+
+
+### And G18
+target_names <- rownames(amp_pha_mat)[!grepl("G18",rownames(amp_pha_mat))]
+targets_multi <- c(1:length(target_names))
+
+## We need to do it with dynamic e because otherwise the algorithm is not able to escape from the G18 shape
+dyn_e <- data.frame("time" = c(1,10,20,30,40,50,60,70,75,80,85,90,95),
+		    "e" = c(0.38,0.28,0.23,0.2,0.18,0.16,0.14,0.12,0.11,0.1,0.09,0.08,0.07))
+
+AtoMult_G18 <- simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = which(rownames(amp_pha_mat) == "G18_m_G18"), target = targets_multi, method = "AtoMult", sim = sims, npts = npts, only.shapes = F, a = c_a, dynamic_e = dyn_e, f = c_f)
+
+## Create vector with minimum procrustes distances and their 
+pdist_G18 <- data.frame("target" = character(),
+	        	"distance" = numeric())
+
+for (i in 1:sims){
+	pdist_G18[i,1] <- target_names[which.min(AtoMult_G18$P.distances[,i])]
+	pdist_G18[i,2] <- min(AtoMult_G18$P.distances[,i])
+}
+
+
+## Plot
+png("../Figures/SI_figures/Add_SId.png", res = 50, height = 1500, width = 1500)
+layout(mat)
+for (i in 1:sims){
+	plot(AtoMult_G18$Shapes[[i]], type = "l", lwd = 1.5, cex.main = 2, xlab = "", ylab = "", bty = "n", main = paste0("t = ",i," / S = ", pdist_G18[i,1]))
+	polygon(AtoMult_G18$Shapes[[i]], col = adjustcolor("slategray3", alpha = 0.85))
+}
+plot(pdist_G18$distance, type = "l", lwd = 3, cex.main = 2, cex.lab = 2.2, mgp = c(1.8,0.7,0), col = "slategrey", main = "Procrustes distances", xlab = "Time", ylab = "Dist", bty = "n")
+dev.off()
+###################################################################################
 
 
 
