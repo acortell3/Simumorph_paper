@@ -21,7 +21,7 @@ sims <- 100
 npts <- 120
 	
 mat <- matrix(c(seq(1,100), rep(101,20)), nrow = 12, byrow = T) ## For plots
-seed <- 1
+seed <- 123
 
 ###################################################################################
 ## Figure 3. Stability covariance matrix
@@ -72,9 +72,11 @@ set.seed(seed)
 ### Let's try with the full morphospace
 targets_multi <- c(1:nrow(amp_pha_mat))
 target_names <- rownames(amp_pha_mat)
+c_a <- 3
+c_f <- 50
 
 
-AtoMult_G1 <- simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = which(rownames(amp_pha_mat) == "G1.1_m_G1.1"), target = targets_multi, method = "AtoMult", sim = sims, npts = npts, only.shapes = F, a = 0.6, e = 0.05, f = 25)
+AtoMult_G1 <- simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = which(rownames(amp_pha_mat) == "G1.1_m_G1.1"), target = targets_multi, method = "AtoMult", sim = sims, npts = npts, only.shapes = F, a = c_a, e = 0.05, f = c_f)
 
 ## Create vector with minimum procrustes distances and their 
 pdist_G1 <- data.frame("target" = character(),
@@ -97,7 +99,7 @@ plot(pdist_G1$distance, type = "l", lwd = 3, cex.main = 2, cex.lab = 2.2, mgp = 
 dev.off()
 
 ## Go for G2
-AtoMult_G2 <- simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = which(rownames(amp_pha_mat) == "G2_m_G2"), target = targets_multi, method = "AtoMult", sim = sims, npts = npts, only.shapes = F, a = 0.6, e = 0.05, f = 25)
+AtoMult_G2 <- simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = which(rownames(amp_pha_mat) == "G2_m_G2"), target = targets_multi, method = "AtoMult", sim = sims, npts = npts, only.shapes = F, a = c_a, e = 0.05, f = c_f)
 
 ## Create vector with minimum procrustes distances and their 
 pdist_G2 <- data.frame("target" = character(),
@@ -121,7 +123,7 @@ dev.off()
 
 
 ### Now G9
-AtoMult_G9 <- simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = which(rownames(amp_pha_mat) == "G9_m_G9"), target = targets_multi, method = "AtoMult", sim = sims, npts = npts, only.shapes = F, a = 0.6, e = 0.05, f = 25)
+AtoMult_G9 <- simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = which(rownames(amp_pha_mat) == "G9_m_G9"), target = targets_multi, method = "AtoMult", sim = sims, npts = npts, only.shapes = F, a = c_a, e = 0.05, f = c_f)
 
 ## Create vector with minimum procrustes distances and their 
 pdist_G9 <- data.frame("target" = character(),
@@ -145,7 +147,7 @@ dev.off()
 
 
 ### And G18
-AtoMult_G18 <- simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = which(rownames(amp_pha_mat) == "G18_m_G18"), target = targets_multi, method = "AtoMult", sim = sims, npts = npts, only.shapes = F, a = 0.6, e = 0.05, f = 25)
+AtoMult_G18 <- simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = which(rownames(amp_pha_mat) == "G18_m_G18"), target = targets_multi, method = "AtoMult", sim = sims, npts = npts, only.shapes = F, a = c_a, e = 0.05, f = c_f)
 
 ## Create vector with minimum procrustes distances and their 
 pdist_G18 <- data.frame("target" = character(),
