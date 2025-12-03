@@ -302,12 +302,15 @@ for (i in 1:sims){
 plot(pdist_G2_SI$distance, type = "l", lwd = 3, cex.main = 2, cex.lab = 2.2, mgp = c(1.8,0.7,0), col = "slategrey", main = "Procrustes distances", xlab = "Time", ylab = "Dist", bty = "n")
 dev.off()
 
-
 ### Now G9
 target_names <- rownames(amp_pha_mat)[!grepl("G9",rownames(amp_pha_mat))]
 targets_multi <- grep("G9",rownames(amp_pha_mat), invert = TRUE)
 
-AtoMult_G9_SI <- simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = which(rownames(amp_pha_mat) == "G9_m_G9"), target = targets_multi, method = "AtoMult", sim = sims, npts = npts, only.shapes = F, a = c_a, e = 0.05, f = c_f)
+## We need to do it with dynamic e because otherwise the algorithm is not able to escape from the G18 shape
+dyn_e <- data.frame("time" = c(1,10,20,30,40,50,60,75,80,95),
+		    "e" = c(0.14,0.13,0.12,0.11,0.1,0.09,0.08,0.07,0.06,0.055))
+
+AtoMult_G9_SI <- simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = which(rownames(amp_pha_mat) == "G9_m_G9"), target = targets_multi, method = "AtoMult", sim = sims, npts = npts, only.shapes = F, a = c_a, dynamic_e = dyn_e, f = c_f)
 
 ## Create vector with minimum procrustes distances and their 
 pdist_G9_SI <- data.frame("target" = character(),
@@ -329,15 +332,16 @@ for (i in 1:sims){
 plot(pdist_G9_SI$distance, type = "l", lwd = 3, cex.main = 2, cex.lab = 2.2, mgp = c(1.8,0.7,0), col = "slategrey", main = "Procrustes distances", xlab = "Time", ylab = "Dist", bty = "n")
 dev.off()
 
-
 ### And G18
 target_names <- rownames(amp_pha_mat)[!grepl("G18",rownames(amp_pha_mat))]
 targets_multi <- grep("G18",rownames(amp_pha_mat), invert = TRUE)
 
 ## We need to do it with dynamic e because otherwise the algorithm is not able to escape from the G18 shape
-dyn_e <- data.frame("time" = c(1,10,20,30,40,50,60,70,75,80,85,90,95),
-		    "e" = c(0.38,0.28,0.23,0.2,0.18,0.16,0.14,0.12,0.11,0.1,0.09,0.08,0.07))
+dyn_e <- data.frame("time" = c(1,10,20,30,40,50,60,70,75,85,90,95),
+		    "e" = c(0.16,0.15,0.14,0.13,0.12,0.11,0.1,0.09,0.08,0.07,0.06,0.05))
+#dyn_e$e <- dyn_e$e-0.02
 
+set.seed(123)
 AtoMult_G18_SI <- simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = which(rownames(amp_pha_mat) == "G18_m_G18"), target = targets_multi, method = "AtoMult", sim = sims, npts = npts, only.shapes = F, a = c_a, dynamic_e = dyn_e, f = c_f)
 
 ## Create vector with minimum procrustes distances and their 
