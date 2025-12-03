@@ -1,7 +1,7 @@
 
 
 ###################################################################################
-####################################################################################
+###################################################################################
 ## Reproducible script for Cortell-Nicolau, A., Kandler, A., 'name of the paper', Journal of Archaeological Method and Theory
 ####################################################################################
 ####################################################################################
@@ -235,7 +235,7 @@ Free <- simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = 1, target = nro
 ## Plot
 png("../Figures/Fig_7.png", res = 50, height = 1500, width = 1500)
 layout(mat)
-for (i in 1:sims{
+for (i in 1:sims){
 	plot(Free$Shapes[[i]], type = "l", lwd = 1.5, cex.main = 2, xlab = "", ylab = "", bty = "n", main = paste0("t = ",i))
 	polygon(Free$Shapes[[i]], col = adjustcolor("lightsalmon4", alpha = 0.85))
 }
