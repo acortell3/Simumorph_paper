@@ -34,12 +34,12 @@ dev.off()
 ## Figure 4a. Case study 1
 set.seed(seed)
 
-AtoAa <- simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = 1, target = 1, method = "AtoA", sim = sims, npts = npts, only.shapes = F, a = 0.2, e = 0.05, f = 100)
+AtoAa <- simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = which(rownames(amp_pha_mat) == "G9_m_G9"), target = which(rownames(amp_pha_mat) == "G9_m_G9"), method = "AtoA", sim = sims, npts = npts, only.shapes = F, a = 0.2, e = 0.03, f = 100)
 
 cols <- c("blue","red","yellow","green","purple","black","orange")
 
 ## Plot
-png("../Figures/Fig_4a.png", res = 50, height = 1500, width = 1500)
+png("../Figures/Fig_4.png", res = 50, height = 1500, width = 1500)
 layout(mat)
 for (i in 1:sims){
 	plot(AtoAa$Shapes[[i]], type = "l", lwd = 1.5, cex.main = 2, xlab = "", ylab = "", bty = "n", main = paste0("t = ",i))
@@ -53,13 +53,13 @@ dev.off()
 ## Figure 4b. Case study 1 (dynamic)
 set.seed(seed)
 
-dyn_e <- data.frame("time" = c(1,10,40,70,85,95),
-		    "e" = c(0.02,0.03,0.25,0.2,0.15,0.1))
+dyn_e <- data.frame("time" = c(1,10,20,40,65,85,95),
+		    "e" = c(0.02,0.03,0.2,0.1,0.08,0.07,0.06))
 
-AtoAb <- simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = 1, target = 1, method = "AtoA", sim = sims, npts = npts, only.shapes = F, a = 0.2, f = 100, dynamic_e = dyn_e)
+AtoAb <- simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = which(rownames(amp_pha_mat) == "G9_m_G9"), target = which(rownames(amp_pha_mat) == "G9_m_G9"), method = "AtoA", sim = sims, npts = npts, only.shapes = F, a = 0.2, f = 100, dynamic_e = dyn_e)
 
 ## Plot
-png("../Figures/SI_figures/Fig_4b.png", res = 50, height = 1500, width = 1500)
+png("../Figures/Fig_5.png", res = 50, height = 1500, width = 1500)
 layout(mat)
 for (i in 1:sims){
 	plot(AtoAb$Shapes[[i]], type = "l", lwd = 1.5, cex.main = 2, xlab = "", ylab = "", bty = "n", main = paste0("t = ",i))
@@ -73,10 +73,10 @@ dev.off()
 ## Figure 5. Case study 2a
 set.seed(seed)
 
-AtoBa <- simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = 1, target = which(rownames(amp_pha_mat)=="G18_m_G18"), method = "AtoB", sim = sims, npts = npts, only.shapes = F, a = 0.5, e = 0.5, f = 100, max.attempts = 500, speedAtoB = 0)
+AtoBa <- simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = which(rownames(amp_pha_mat)=="G2_m_G2"), target = which(rownames(amp_pha_mat)=="G18_m_G18"), method = "AtoB", sim = sims, npts = npts, only.shapes = F, a = 0.5, e = 0.5, f = 100, max.attempts = 500, speedAtoB = 0)
 
 ## Plot
-png("../Figures/Fig_5a.png", res = 50, height = 1500, width = 1500)
+png("../Figures/Fig_6.png", res = 50, height = 1500, width = 1500)
 layout(mat)
 for (i in 1:sims){
 	plot(AtoBa$Shapes[[i]], type = "l", lwd = 1.5, cex.main = 2, xlab = "", ylab = "", bty = "n", main = paste0("t = ",i))
@@ -90,12 +90,12 @@ dev.off()
 ## Figure 5. Case study 2b (higher dist)
 set.seed(seed)
 
-AtoBb <- simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = 1, target = which(rownames(amp_pha_mat)=="G18_m_G18"), method = "AtoB", sim = 500, npts = npts, only.shapes = F, a = 0.5, e = 0.5, f = 100, max.attempts = 500, speedAtoB = 0.0035)
+AtoBb <- simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = which(rownames(amp_pha_mat)=="G2_m_G2"), target = which(rownames(amp_pha_mat)=="G18_m_G18"), method = "AtoB", sim = 500, npts = npts, only.shapes = F, a = 0.5, e = 0.5, f = 100, max.attempts = 500, speedAtoB = 0.0035)
 
 samp <- seq(1,500,5)
 
 ## Plot
-png("../Figures/SI_figures/Fig_5b.png", res = 50, height = 1500, width = 1500)
+png("../Figures/Fig_7.png", res = 50, height = 1500, width = 1500)
 layout(mat)
 for (i in 1:sims){
 	plot(AtoBb$Shapes[[samp[i]]], type = "l", lwd = 1.5, cex.main = 2, xlab = "", ylab = "", bty = "n", main = paste0("t = ",samp[i]))
@@ -109,10 +109,10 @@ dev.off()
 ## Figure 5. Case study 2c (lower dist)
 set.seed(seed)
 
-AtoBc <- simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = 1, target = which(rownames(amp_pha_mat)=="G18_m_G18"), method = "AtoB", sim = sims, npts = npts, only.shapes = F, a = 0.5, e = 0.5, f = 100, max.attempts = 500, speedAtoB = -0.002)
+AtoBc <- simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = which(rownames(amp_pha_mat)=="G2_m_G2"), target = which(rownames(amp_pha_mat)=="G18_m_G18"), method = "AtoB", sim = sims, npts = npts, only.shapes = F, a = 0.5, e = 0.5, f = 100, max.attempts = 500, speedAtoB = -0.002)
 
 ## Plot
-png("../Figures/SI_figures/Fig_5c.png", res = 50, height = 1500, width = 1500)
+png("../Figures/SI_figures/Fig_1_SI.png", res = 50, height = 1500, width = 1500)
 layout(mat)
 for (i in 1:sims){
 	plot(AtoBc$Shapes[[i]], type = "l", lwd = 1.5, cex.main = 2, xlab = "", ylab = "", bty = "n", main = paste0("t = ",i))
@@ -146,7 +146,7 @@ for (i in 1:sims){
 
 
 ## Plot
-png("../Figures/Fig_6a.png", res = 50, height = 1500, width = 1500)
+png("../Figures/SI_figures/Fig_2_SI.png", res = 50, height = 1500, width = 1500)
 layout(mat)
 for (i in 1:sims){
 	plot(AtoMult_G1$Shapes[[i]], type = "l", lwd = 1.5, cex.main = 2, xlab = "", ylab = "", bty = "n", main = paste0("t = ",i," / S = ", pdist_G1[i,1]))
@@ -169,7 +169,7 @@ for (i in 1:sims){
 
 
 ## Plot
-png("../Figures/SI_figures/Fig_6b.png", res = 50, height = 1500, width = 1500)
+png("../Figures/Fig_8.png", res = 50, height = 1500, width = 1500)
 layout(mat)
 for (i in 1:sims){
 	plot(AtoMult_G2$Shapes[[i]], type = "l", lwd = 1.5, cex.main = 2, xlab = "", ylab = "", bty = "n", main = paste0("t = ",i," / S = ", pdist_G2[i,1]))
@@ -193,7 +193,7 @@ for (i in 1:sims){
 
 
 ## Plot
-png("../Figures/SI_figures/Fig_6c.png", res = 50, height = 1500, width = 1500)
+png("../Figures/SI_figures/Fig_4_SI.png", res = 50, height = 1500, width = 1500)
 layout(mat)
 for (i in 1:sims){
 	plot(AtoMult_G9$Shapes[[i]], type = "l", lwd = 1.5, cex.main = 2, xlab = "", ylab = "", bty = "n", main = paste0("t = ",i," / S = ", pdist_G9[i,1]))
@@ -217,7 +217,7 @@ for (i in 1:sims){
 
 
 ## Plot
-png("../Figures/SI_figures/Fig_6d.png", res = 50, height = 1500, width = 1500)
+png("../Figures/Fig_10.png", res = 50, height = 1500, width = 1500)
 layout(mat)
 for (i in 1:sims){
 	plot(AtoMult_G18$Shapes[[i]], type = "l", lwd = 1.5, cex.main = 2, xlab = "", ylab = "", bty = "n", main = paste0("t = ",i," / S = ", pdist_G18[i,1]))
@@ -235,7 +235,7 @@ set.seed(seed)
 Free <- simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = 1, target = nrow(amp_pha_mat), method = "Free", sim = sims, npts = npts, only.shapes = F, a = 0.2, e = 0.05, f = 100, max.attempts = 500)
 
 ## Plot
-png("../Figures/Fig_7.png", res = 50, height = 1500, width = 1500)
+png("../Figures/Fig_12.png", res = 50, height = 1500, width = 1500)
 layout(mat)
 for (i in 1:sims){
 	plot(Free$Shapes[[i]], type = "l", lwd = 1.5, cex.main = 2, xlab = "", ylab = "", bty = "n", main = paste0("t = ",i))
@@ -245,7 +245,7 @@ plot(unlist(Free$P.distances), type = "l", lwd = 3, cex.main = 2, cex.lab = 2.2,
 dev.off()
 
 ###################################################################################
-## Figure Additional SI. Case study 3 without init in target
+## Case study 3 without init in target
 set.seed(seed)
 
 ### Let's try with the full morphospace
@@ -269,7 +269,7 @@ for (i in 1:sims){
 
 
 ## Plot
-png("../Figures/SI_figures/Add_SIa.png", res = 50, height = 1500, width = 1500)
+png("../Figures/SI_figures/Fig_3_SI.png", res = 50, height = 1500, width = 1500)
 layout(mat)
 for (i in 1:sims){
 	plot(AtoMult_G1_SI$Shapes[[i]], type = "l", lwd = 1.5, cex.main = 2, xlab = "", ylab = "", bty = "n", main = paste0("t = ",i," / S = ", pdist_G1_SI[i,1]))
@@ -295,7 +295,7 @@ for (i in 1:sims){
 
 
 ## Plot
-png("../Figures/SI_figures/Add_SIb.png", res = 50, height = 1500, width = 1500)
+png("../Figures/Fig_9.png", res = 50, height = 1500, width = 1500)
 layout(mat)
 for (i in 1:sims){
 	plot(AtoMult_G2_SI$Shapes[[i]], type = "l", lwd = 1.5, cex.main = 2, xlab = "", ylab = "", bty = "n", main = paste0("t = ",i," / S = ", pdist_G2_SI[i,1]))
@@ -325,7 +325,7 @@ for (i in 1:sims){
 
 
 ## Plot
-png("../Figures/SI_figures/Add_SIc.png", res = 50, height = 1500, width = 1500)
+png("../Figures/SI_figures/Fig_5_SI.png", res = 50, height = 1500, width = 1500)
 layout(mat)
 for (i in 1:sims){
 	plot(AtoMult_G9_SI$Shapes[[i]], type = "l", lwd = 1.5, cex.main = 2, xlab = "", ylab = "", bty = "n", main = paste0("t = ",i," / S = ", pdist_G9_SI[i,1])) 
@@ -357,14 +357,14 @@ for (i in 1:sims){
 
 
 ## Plot
-png("../Figures/SI_figures/Add_SId.png", res = 50, height = 1500, width = 1500)
+png("../Figures/Fig_11.png", res = 50, height = 1500, width = 1500)
 layout(mat)
 for (i in 1:sims){
 	plot(AtoMult_G18_SI$Shapes[[i]], type = "l", lwd = 1.5, cex.main = 2, xlab = "", ylab = "", bty = "n", main = paste0("t = ",i," / S = ", pdist_G18_SI[i,1]))
 	polygon(AtoMult_G18_SI$Shapes[[i]], col = adjustcolor("slategray3", alpha = 0.85))
 }
 plot(pdist_G18_SI$distance, type = "l", lwd = 3, cex.main = 2, cex.lab = 2.2, mgp = c(1.8,0.7,0), col = "slategrey", main = "Procrustes distances", xlab = "Time", ylab = "Dist", bty = "n")
-adev.off()
+dev.off()
 ###################################################################################
 
 
