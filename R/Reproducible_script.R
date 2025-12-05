@@ -38,55 +38,6 @@ AtoAa <- simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = 1, target = 1,
 
 cols <- c("blue","red","yellow","green","purple","black","orange")
 
-an <- sapply(AtoAa$F.parameters, function(x) x$an)
-bn <- sapply(AtoAa$F.parameters, function(x) x$bn)
-cn <- sapply(AtoAa$F.parameters, function(x) x$cn)
-dn <- sapply(AtoAa$F.parameters, function(x) x$dn)
-
-png("../Figures/SI_figures/CaseAtoA_harms_fou_parsX.png", res = 50, height = 900, width = 900)
-par(mfrow = c(2,2))
-plot(AtoAa$Xamplitude[1,], type = "l", col = cols[1], ylim = c(0,1.5), main = "AtoA_A_x", ylab = "value")
-for (i in 2:7){
-	lines(AtoAa$Xamplitude[i,], col = cols[i])
-}
-plot(AtoAa$Xphases[1,], type = "l", col = cols[1], ylim = c(-3,1.1), main = "Phi_x", ylab = "value")
-for (i in 2:7){
-	lines(AtoAa$Xphases[i,], col = cols[i])
-}
-
-plot(an[1,], type = "l", col = cols[1], ylim = c(-0.1,0.1), main = "a_n", ylab = "value")
-for (i in 2:7){
-	lines(an[i,], col = cols[i])
-}
-
-plot(bn[1,], type = "l", col = cols[1], ylim = c(-0.2,1.5), main = "b_n", ylab = "value")
-for (i in 2:7){
-	lines(bn[i,], col = cols[i])
-}
-dev.off()
-
-png("../Figures/SI_figures/CaseAtoA_harms_fou_parsY.png", res = 50, height = 900, width = 900)
-par(mfrow = c(2,2))
-plot(AtoAa$Yamplitude[1,], type = "l", col = cols[1], ylim = c(0,0.8), main = "AtoA_A_y", ylab = "value")
-for (i in 2:7){
-	lines(AtoAa$Yamplitude[i,], col = cols[i])
-}
-plot(AtoAa$Yphases[1,], type = "l", col = cols[1], ylim = c(-2,3), main = "Phi_y", ylab = "value")
-for (i in 2:7){
-	lines(AtoAa$Yphases[i,], col = cols[i])
-}
-
-plot(cn[1,], type = "l", col = cols[1], ylim = c(-0.8,0.25), main = "c_n", ylab = "value")
-for (i in 2:7){
-	lines(cn[i,], col = cols[i])
-}
-
-plot(dn[1,], type = "l", col = cols[1], ylim = c(-0.1,0.05), main = "d_n", ylab = "value")
-for (i in 2:7){
-	lines(dn[i,], col = cols[i])
-}
-dev.off()
-
 ## Plot
 png("../Figures/Fig_4a.png", res = 50, height = 1500, width = 1500)
 layout(mat)
@@ -123,55 +74,6 @@ dev.off()
 set.seed(seed)
 
 AtoBa <- simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = 1, target = which(rownames(amp_pha_mat)=="G18_m_G18"), method = "AtoB", sim = sims, npts = npts, only.shapes = F, a = 0.5, e = 0.5, f = 100, max.attempts = 500, speedAtoB = 0)
-
-an <- sapply(AtoBa$F.parameters, function(x) x$an)
-bn <- sapply(AtoBa$F.parameters, function(x) x$bn)
-cn <- sapply(AtoBa$F.parameters, function(x) x$cn)
-dn <- sapply(AtoBa$F.parameters, function(x) x$dn)
-
-png("../Figures/SI_figures/CaseAtoB_harms_fou_parsX.png", res = 50, height = 900, width = 900)
-par(mfrow = c(2,2))
-plot(AtoBa$Xamplitude[1,], type = "l", col = cols[1], ylim = c(0,1.5), main = "AtoB_A_x", ylab = "value")
-for (i in 2:7){
-	lines(AtoBa$Xamplitude[i,], col = cols[i])
-}
-plot(AtoBa$Xphases[1,], type = "l", col = cols[1], ylim = c(-3,1.1), main = "Phi_x", ylab = "value")
-for (i in 2:7){
-	lines(AtoBa$Xphases[i,], col = cols[i])
-}
-
-plot(an[1,], type = "l", col = cols[1], ylim = c(-0.1,0.1), main = "a_n", ylab = "value")
-for (i in 2:7){
-	lines(an[i,], col = cols[i])
-}
-
-plot(bn[1,], type = "l", col = cols[1], ylim = c(-0.2,1.5), main = "b_n", ylab = "value")
-for (i in 2:7){
-	lines(bn[i,], col = cols[i])
-}
-dev.off()
-
-png("../Figures/SI_figures/CaseAtoB_harms_fou_parsY.png", res = 50, height = 900, width = 900)
-par(mfrow = c(2,2))
-plot(AtoBa$Yamplitude[1,], type = "l", col = cols[1], ylim = c(0,0.8), main = "AtoB_A_y", ylab = "value")
-for (i in 2:7){
-	lines(AtoBa$Yamplitude[i,], col = cols[i])
-}
-plot(AtoBa$Yphases[1,], type = "l", col = cols[1], ylim = c(-2,3), main = "Phi_y", ylab = "value")
-for (i in 2:7){
-	lines(AtoBa$Yphases[i,], col = cols[i])
-}
-
-plot(cn[1,], type = "l", col = cols[1], ylim = c(-0.8,0.25), main = "c_n", ylab = "value")
-for (i in 2:7){
-	lines(cn[i,], col = cols[i])
-}
-
-plot(dn[1,], type = "l", col = cols[1], ylim = c(-0.05,0.11), main = "d_n", ylab = "value")
-for (i in 2:7){
-	lines(dn[i,], col = cols[i])
-}
-dev.off()
 
 ## Plot
 png("../Figures/Fig_5a.png", res = 50, height = 1500, width = 1500)
