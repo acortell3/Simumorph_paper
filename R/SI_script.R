@@ -15,7 +15,7 @@ amp_pha_cov <- readRDS("../Utilities/amp_pha_cov.rds") ## Covariance matrix
 ## Utilities
 sims <- 100
 npts <- 120
-n_iter <- 10
+n_iter <- 100
 ncores <- 10
 seed <- 123
 
@@ -57,10 +57,20 @@ AtoB_min_div <- vapply(SI_AtoB, function(x) (min(x$P.distance)), numeric(1))
 AtoB_min_shapes <- lapply(seq_along(SI_AtoB), function(i) {SI_AtoB[[i]]$Shapes[[AtoB_min_div_index[i]]]})
 
 ## Save results
-SI_AtoB_res <- list("indexes" = AtoB_max_div_index,
-		    "max_dist" = AtoB_max_div,
-		    "Shapes" = AtoB_max_shapes)
+SI_AtoB_res <- list("indexes" = AtoB_min_div_index,
+		    "max_dist" = AtoB_min_div,
+		    "Shapes" = AtoB_min_shapes)
 saveRDS(SI_AtoB_res, "../SI_results/SI_AtoB_res.rds")
+
+
+
+#####################################################################
+#####################################################################
+### I'M HERE
+#####################################################################
+#####################################################################
+
+
 
 ################ EXTENDED SIMULATIONS AtoMult
 ## When is it a different shape? How many shapes does it go through? And to which shapes does it change? Comparison with and without initial shape in target pool
@@ -71,13 +81,26 @@ target_names <- rownames(amp_pha_mat)
 c_a <- 3
 c_f <- 50
 
-
 SI_AtoMulta_G1_fun <- function(i) {simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = which(rownames(amp_pha_mat) == "G1.1_m_G1.1"), target = targets_multi, method = "AtoMult", sim = sims, npts = npts, only.shapes = F, a = c_a, e = 0.05, f = c_f)}
 
-set.seed(123)
+set.seed(seed)
 
 ## !!!!!! WARNING!!!!!!!! Windows users, not that mclapply only works on Linux. You'll have to adapt this to foreach
 SI_AtoMulta_G1 <- mclapply(1:n_iter, SI_AtoMulta_G1_fun, mc.cores = ncores)
+
+SI_AtoMulta_G1_shapes <- as.data.frame(matrix(NA,nrow = n_iter, ncol = sims))
+
+for (i in 1:n_iter){
+	index_min <- apply(SI_AtoMulta_G1[[i]]$P.distance,2,which.min)
+	SI_AtoMulta_G1_shapes[i,] <- target_names[unlist(index_min)]
+}
+
+
+
+
+
+
+test <- SI_AtoMulta_G1[[5]]
 
 SI_AtoMulta_G1_stats <- as.data.frame(matrix(NA, nrow = n_iter, ncol = sims))
 
