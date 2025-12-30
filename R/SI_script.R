@@ -15,10 +15,9 @@ amp_pha_cov <- readRDS("../Utilities/amp_pha_cov.rds") ## Covariance matrix
 ## Utilities
 sims <- 100
 npts <- 120
-n_iter <- 100
+n_iter <- 1
 ncores <- 10
 seed <- 123
-
 
 ################ EXTENDED SIMULATIONS AtoA
 ## 100 most distant shapes to initial shapes. Need Procrustes distances, time of max divergence, and shapes themselves
@@ -47,7 +46,7 @@ saveRDS(SI_AtoA_res, "../SI_results/SI_AtoA_res.rds")
 
 SI_AtoB_fun <- function(i) {simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = which(rownames(amp_pha_mat)=="G2_m_G2"), target = which(rownames(amp_pha_mat)=="G18_m_G18"), method = "AtoB", sim = 500, npts = npts, only.shapes = F, a = 0.5, e = 0.5, f = 100, max.attempts = 500, speedAtoB = 0.0035)}
 
-set.seed(123)
+set.seed(seed)
 
 ## !!!!!! WARNING!!!!!!!! Windows users, not that mclapply only works on Linux. You'll have to adapt this to foreach
 SI_AtoB <- mclapply(1:n_iter, SI_AtoB_fun, mc.cores = ncores)
@@ -58,22 +57,16 @@ AtoB_min_shapes <- lapply(seq_along(SI_AtoB), function(i) {SI_AtoB[[i]]$Shapes[[
 
 ## Save results
 SI_AtoB_res <- list("indexes" = AtoB_min_div_index,
-		    "max_dist" = AtoB_min_div,
+		    "min_dist" = AtoB_min_div,
 		    "Shapes" = AtoB_min_shapes)
 saveRDS(SI_AtoB_res, "../SI_results/SI_AtoB_res.rds")
 
-
-
-#####################################################################
-#####################################################################
-### I'M HERE
-#####################################################################
-#####################################################################
-
-
-
 ################ EXTENDED SIMULATIONS AtoMult
 ## When is it a different shape? How many shapes does it go through? And to which shapes does it change? Comparison with and without initial shape in target pool
+
+## We use the same types as in the paper
+
+#### G1
 
 #### AtoMulta. Include initial shape in target pool
 targets_multi <- c(1:nrow(amp_pha_mat))
@@ -95,45 +88,69 @@ for (i in 1:n_iter){
 	SI_AtoMulta_G1_shapes[i,] <- target_names[unlist(index_min)]
 }
 
+## Save results
+saveRDS(SI_AtoMulta_G1_shapes, "../SI_results/SI_AtoMulta_G1_res.rds")
 
+#### G2
 
+SI_AtoMulta_G2_fun <- function(i) {simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = which(rownames(amp_pha_mat) == "G2_m_G2"), target = targets_multi, method = "AtoMult", sim = sims, npts = npts, only.shapes = F, a = c_a, e = 0.05, f = c_f)}
 
+set.seed(seed)
 
+## !!!!!! WARNING!!!!!!!! Windows users, not that mclapply only works on Linux. You'll have to adapt this to foreach
+SI_AtoMulta_G2 <- mclapply(1:n_iter, SI_AtoMulta_G2_fun, mc.cores = ncores)
 
-test <- SI_AtoMulta_G1[[5]]
+SI_AtoMulta_G2_shapes <- as.data.frame(matrix(NA,nrow = n_iter, ncol = sims))
 
-SI_AtoMulta_G1_stats <- as.data.frame(matrix(NA, nrow = n_iter, ncol = sims))
-
-## Retreive names of shapes
-for (j in 1:n_iter){
-
-	#AtoMult_G1 <- SI_AtoMulta_G1[[j]]
-	## Create vector with minimum procrustes distances and their 
-	#pdist_G1 <- data.frame("target" = character(),
-	#		       "distance" = numeric())
-	
-	for (i in 1:sims){
-		SI_AtoMulta_G1_stats[j,] <- target_names[which.min(SI_AtoMulta_G1[[j]]$P.distances[2:length(target_names),i])]
-		#pdist_G1[i,1] <- target_names[which.min(AtoMult_G1a$P.distances[,i])]
-		#pdist_G1[i,2] <- min(AtoMult_G1$P.distances[,i])
-	}
-
-	#SI_AtoMulta_G1_stats[[j]] <- pdist_G1
+for (i in 1:n_iter){
+	index_min <- apply(SI_AtoMulta_G2[[i]]$P.distance,2,which.min)
+	SI_AtoMulta_G2_shapes[i,] <- target_names[unlist(index_min)]
 }
 
+## Save results
+saveRDS(SI_AtoMulta_G2_shapes, "../SI_results/SI_AtoMulta_G2_res.rds")
 
-AtoMulta_min_div_index <- vapply(SI_AtoMulta, function(x) {which.min(x$P.distance)}, integer(1))
-AtoMulta_min_div <- vapply(SI_AtoMulta, function(x) (min(x$P.distance)), numeric(1))
-AtoMulta_min_shapes <- lapply(seq_along(SI_AtoMulta), function(i) {SI_AtoMulta[[i]]$Shapes[[AtoMulta_min_div_index[i]]]})
+#### G9
+
+SI_AtoMulta_G9_fun <- function(i) {simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = which(rownames(amp_pha_mat) == "G9_m_G9"), target = targets_multi, method = "AtoMult", sim = sims, npts = npts, only.shapes = F, a = c_a, e = 0.05, f = c_f)}
+
+set.seed(seed)
+
+## !!!!!! WARNING!!!!!!!! Windows users, not that mclapply only works on Linux. You'll have to adapt this to foreach
+SI_AtoMulta_G9 <- mclapply(1:n_iter, SI_AtoMulta_G9_fun, mc.cores = ncores)
+
+SI_AtoMulta_G9_shapes <- as.data.frame(matrix(NA,nrow = n_iter, ncol = sims))
+
+for (i in 1:n_iter){
+	index_min <- apply(SI_AtoMulta_G9[[i]]$P.distance,2,which.min)
+	SI_AtoMulta_G9_shapes[i,] <- target_names[unlist(index_min)]
+}
 
 ## Save results
-SI_AtoMulta_res <- list("indexes" = AtoMulta_max_div_index,
-			"max_dist" = AtoMulta_max_div,
-			"Shapes" = AtoMulta_max_shapes)
+saveRDS(SI_AtoMulta_G9_shapes, "../SI_results/SI_AtoMulta_G9_res.rds")
 
-saveRDS(SI_AtoMulta_res, "../SI_results/SI_AtoMulta_res.rds")
+#### G18
+SI_AtoMulta_G18_fun <- function(i) {simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = which(rownames(amp_pha_mat) == "G18_m_G18"), target = targets_multi, method = "AtoMult", sim = sims, npts = npts, only.shapes = F, a = c_a, e = 0.05, f = c_f)}
+
+set.seed(seed)
+
+## !!!!!! WARNING!!!!!!!! Windows users, not that mclapply only works on Linux. You'll have to adapt this to foreach
+SI_AtoMulta_G18 <- mclapply(1:n_iter, SI_AtoMulta_G18_fun, mc.cores = ncores)
+
+SI_AtoMulta_G18_shapes <- as.data.frame(matrix(NA,nrow = n_iter, ncol = sims))
+
+for (i in 1:n_iter){
+	index_min <- apply(SI_AtoMulta_G18[[i]]$P.distance,2,which.min)
+	SI_AtoMulta_G18_shapes[i,] <- target_names[unlist(index_min)]
+}
+
+## Save results
+saveRDS(SI_AtoMulta_G18_shapes, "../SI_results/SI_AtoMulta_G18_res.rds")
+
 ### AtoMultb. Don't include initial shape in target pool
-### Let's try with the full morphospace
+
+#### G1
+
 target_names <- rownames(amp_pha_mat)[!grepl("G1.1",rownames(amp_pha_mat))]
 targets_multi <- grep("G1.1", rownames(amp_pha_mat), invert = TRUE)
 
@@ -141,12 +158,146 @@ c_a <- 3
 c_f <- 50
 
 
-SI_AtoMult_without_init <- simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = which(rownames(amp_pha_mat) == "G1.1_m_G1.1"), target = targets_multi, method = "AtoMult", sim = sims, npts = npts, only.shapes = F, a = c_a, e = 0.05, f = c_f)
+SI_AtoMultb_G1_fun <- function(i) {simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = which(rownames(amp_pha_mat) == "G1.1_m_G1.1"), target = targets_multi, method = "AtoMult", sim = sims, npts = npts, only.shapes = F, a = c_a, e = 0.05, f = c_f)}
 
+set.seed(seed)
+
+## !!!!!! WARNING!!!!!!!! Windows users, not that mclapply only works on Linux. You'll have to adapt this to foreach
+SI_AtoMultb_G1 <- mclapply(1:n_iter, SI_AtoMultb_G1_fun, mc.cores = ncores)
+
+SI_AtoMultb_G1_shapes <- as.data.frame(matrix(NA,nrow = n_iter, ncol = sims))
+
+for (i in 1:n_iter){
+	index_min <- apply(SI_AtoMultb_G1[[i]]$P.distance,2,which.min)
+	SI_AtoMultb_G1_shapes[i,] <- target_names[unlist(index_min)]
+}
+
+## Save results
+saveRDS(SI_AtoMultb_G1_shapes, "../SI_results/SI_AtoMultb_G1_res.rds")
+
+#### G2
+target_names <- rownames(amp_pha_mat)[!grepl("G2",rownames(amp_pha_mat))]
+targets_multi <- grep("G2",rownames(amp_pha_mat), invert = TRUE)
+
+SI_AtoMultb_G2_fun <- function(i) {simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = which(rownames(amp_pha_mat) == "G2_m_G2"), target = targets_multi, method = "AtoMult", sim = sims, npts = npts, only.shapes = F, a = c_a, e = 0.05, f = c_f)}
+
+set.seed(seed)
+
+## !!!!!! WARNING!!!!!!!! Windows users, not that mclapply only works on Linux. You'll have to adapt this to foreach
+SI_AtoMultb_G2 <- mclapply(1:n_iter, SI_AtoMultb_G2_fun, mc.cores = ncores)
+
+SI_AtoMultb_G2_shapes <- as.data.frame(matrix(NA,nrow = n_iter, ncol = sims))
+
+for (i in 1:n_iter){
+	index_min <- apply(SI_AtoMultb_G2[[i]]$P.distance,2,which.min)
+	SI_AtoMultb_G2_shapes[i,] <- target_names[unlist(index_min)]
+}
+
+## Save results
+saveRDS(SI_AtoMultb_G2_shapes, "../SI_results/SI_AtoMultb_G2_res.rds")
+
+#### G9
+target_names <- rownames(amp_pha_mat)[!grepl("G9",rownames(amp_pha_mat))]
+targets_multi <- grep("G9",rownames(amp_pha_mat), invert = TRUE)
+
+## We need to do it with dynamic e because otherwise the algorithm is not able to escape from the G18 shape
+dyn_e <- data.frame("time" = c(1,10,20,30,40,50,60,75,80,95),
+		    "e" = c(0.14,0.13,0.12,0.11,0.1,0.09,0.08,0.07,0.06,0.055))
+
+SI_AtoMultb_G9_fun <- function(i) {simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = which(rownames(amp_pha_mat) == "G9_m_G9"), target = targets_multi, method = "AtoMult", sim = sims, npts = npts, only.shapes = F, a = c_a, dynamic_e = dyn_e, f = c_f)}
+
+set.seed(seed)
+
+## !!!!!! WARNING!!!!!!!! Windows users, not that mclapply only works on Linux. You'll have to adapt this to foreach
+SI_AtoMultb_G9 <- mclapply(1:n_iter, SI_AtoMultb_G9_fun, mc.cores = ncores)
+
+SI_AtoMultb_G9_shapes <- as.data.frame(matrix(NA,nrow = n_iter, ncol = sims))
+
+for (i in 1:n_iter){
+	index_min <- apply(SI_AtoMultb_G9[[i]]$P.distance,2,which.min)
+	SI_AtoMultb_G9_shapes[i,] <- target_names[unlist(index_min)]
+}
+
+## Save results
+saveRDS(SI_AtoMultb_G9_shapes, "../SI_results/SI_AtoMultb_G9_res.rds")
+
+#### G18
+target_names <- rownames(amp_pha_mat)[!grepl("G18",rownames(amp_pha_mat))]
+targets_multi <- grep("G18",rownames(amp_pha_mat), invert = TRUE)
+
+## We need to do it with dynamic e because otherwise the algorithm is not able to escape from the G18 shape
+dyn_e <- data.frame("time" = c(1,10,20,30,40,50,60,70,75,85,90,95),
+		    "e" = c(0.16,0.15,0.14,0.13,0.12,0.11,0.1,0.09,0.08,0.07,0.06,0.05))
+
+SI_AtoMultb_G18_fun <- function(i) {simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = which(rownames(amp_pha_mat) == "G18_m_G18"), target = targets_multi, method = "AtoMult", sim = sims, npts = npts, only.shapes = F, a = c_a, dynamic_e = dyn_e, f = c_f)}
+
+set.seed(seed)
+
+## !!!!!! WARNING!!!!!!!! Windows users, not that mclapply only works on Linux. You'll have to adapt this to foreach
+SI_AtoMultb_G18 <- mclapply(1:n_iter, SI_AtoMultb_G18_fun, mc.cores = ncores)
+
+SI_AtoMultb_G18_shapes <- as.data.frame(matrix(NA,nrow = n_iter, ncol = sims))
+
+for (i in 1:n_iter){
+	index_min <- apply(SI_AtoMultb_G18[[i]]$P.distance,2,which.min)
+	SI_AtoMultb_G18_shapes[i,] <- target_names[unlist(index_min)]
+}
+
+## Save results
+saveRDS(SI_AtoMultb_G18_shapes, "../SI_results/SI_AtoMultb_G18_res.rds")
 
 ################ EXTENDED SIMULATIONS AtoFree
 ## How much does it deviate? Maximum distance to the whole of the morphospace and to the initial shape
 
-SI_Free <- simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = 1, target = nrow(amp_pha_mat), method = "Free", sim = sims, npts = npts, only.shapes = F, a = 0.2, e = 0.05, f = 100, max.attempts = 500)
+SI_Free_fun <- function(i) {simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = 1, target = nrow(amp_pha_mat), method = "Free", sim = sims, npts = npts, only.shapes = F, a = 0.2, e = 0.05, f = 100, max.attempts = 500)}
 
+set.seed(seed)
+
+## !!!!!! WARNING!!!!!!!! Windows users, not that mclapply only works on Linux. You'll have to adapt this to foreach
+SI_Free <- mclapply(1:n_iter, SI_Free_fun, mc.cores = ncores)
+
+## Maximum distance to the initial shape
+Free_max_div_index <- vapply(SI_Free, function(x) {which.max(x$P.distance)}, integer(1))
+Free_max_div <- vapply(SI_Free, function(x) (max(x$P.distance)), numeric(1))
+Free_max_shapes <- lapply(seq_along(SI_Free), function(i) {SI_Free[[i]]$Shapes[[Free_max_div_index[i]]]})
+
+## Distances to the full morphospace
+
+## Build target morphospace
+tar_morph <- list()
+
+for (i in 1:nrow(amp_pha_mat)){
+	tar_morph[[i]] <- build_s(unlist(amp_pha_mat[i,]),fou.pars = F, npts = npts)
+}
+
+## Df to store distances
+dists_to_morph <- data.frame("Max_distance" = rep(NA,length(SI_Free)),
+			     "Which_max_distance" = rep(NA,length(SI_Free)),
+			     "Type_max_distance" = rep(NA,length(SI_Free)),
+			     "Min_distance" = rep(NA,length(SI_Free)),
+			     "Which_min_distance" = rep(NA,length(SI_Free)),
+			     "Type_min_distance" =  rep(NA,length(SI_Free)))
+
+
+for (j in 1:length(SI_Free)){
+	dists <- t(vapply(seq_len(sims), function(i) {proc_dist(SI_Free[[j]]$Shapes[[i]],tar_morph, multi = T)},numeric(length(tar_morph))))
+
+	## The rationale from maximum distance is: Compute the minimum distance for each row (the closest target shape to the simulated shape) and, from there, which is the maximum distance. That is, the maximum distance to the most similar shape
+	dists_to_morph[j,1] <- max(apply(dists,1,min))
+	dists_to_morph[j,2] <- which(dists == dists_to_morph[j,1], arr.ind = T)[1]
+	dists_to_morph[j,3] <- target_names[which.min(dists[dists_to_morph[j,2],])]
+
+	dists_to_morph[j,4] <- min(dists)
+	dists_to_morph[j,5] <- which(dists == min(dists), arr.ind = T)[1]
+	dists_to_morph[j,6] <- target_names[which.min(dists[dists_to_morph[j,5],])]
+
+}
+
+## Save results
+SI_Free_res <- list("indexes" = Free_max_div_index,
+		    "max_dist" = Free_max_div,
+		    "Shapes" = Free_max_shapes,
+		    "Dists_to_morph" = dists_to_morph)
+
+saveRDS(SI_Free_res, "../SI_results/SI_Free_res.rds")
 
