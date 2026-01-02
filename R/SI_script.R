@@ -19,7 +19,7 @@ n_iter <- 100
 ncores <- 10
 seed <- 123
 
-################ EXTENDED SIMULATIONS AtoA
+#a############### EXTENDED SIMULATIONS AtoA
 ## 100 most distant shapes to initial shapes. Need Procrustes distances, time of max divergence, and shapes themselves
 
 SI_AtoA_fun <- function(i) {simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = which(rownames(amp_pha_mat) == "G9_m_G9"), target = which(rownames(amp_pha_mat) == "G9_m_G9"), method = "AtoA", sim = sims, npts = npts, only.shapes = F, a = 0.2, e = 0.03, f = 100)}
@@ -202,9 +202,8 @@ target_names <- rownames(amp_pha_mat)[!grepl("G9",rownames(amp_pha_mat))]
 targets_multi <- grep("G9",rownames(amp_pha_mat), invert = TRUE)
 
 ## We need to do it with dynamic e because otherwise the algorithm is not able to escape from the G18 shape
-dyn_e <- data.frame("time" = c(1,10,20,30,40,50,60,75,80,95),
-		    "e" = c(0.14,0.13,0.12,0.11,0.1,0.09,0.08,0.07,0.06,0.055))
-dyn_e$e <- dyn_e$e+0.025
+dyn_e <- data.frame("time" = c(1,10,20,30,40,50),
+		    "e" = c(0.14,0.13,0.12,0.11,0.1,0.09))
 
 SI_AtoMultb_G9_fun <- function(i) {simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = which(rownames(amp_pha_mat) == "G9_m_G9"), target = targets_multi, method = "AtoMult", sim = sims, npts = npts, only.shapes = F, a = c_a, dynamic_e = dyn_e, f = c_f)}
 
@@ -228,9 +227,8 @@ target_names <- rownames(amp_pha_mat)[!grepl("G18",rownames(amp_pha_mat))]
 targets_multi <- grep("G18",rownames(amp_pha_mat), invert = TRUE)
 
 ## We need to do it with dynamic e because otherwise the algorithm is not able to escape from the G18 shape
-dyn_e <- data.frame("time" = c(1,10,20,30,40,50,60,70,75,85,90,95),
-		    "e" = c(0.16,0.16,0.15,0.15,0.14,0.14,0.13,0.12,0.11,0.1,0.09,0.08))
-#dyn_e$e <- dyn_e$e+0.04
+dyn_e <- data.frame("time" = c(1,10,20,30,40,75,90),
+		    "e" = c(0.16,0.15,0.14,0.13,0.12,0.11,0.10))
 
 SI_AtoMultb_G18_fun <- function(i) {simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = which(rownames(amp_pha_mat) == "G18_m_G18"), target = targets_multi, method = "AtoMult", sim = sims, npts = npts, only.shapes = F, a = c_a, dynamic_e = dyn_e, f = c_f)}
 
@@ -296,7 +294,7 @@ for (j in 1:length(SI_Free)){
 
 }
 
-## Save results
+#  Save results
 SI_Free_res <- list("indexes" = Free_max_div_index,
 		    "max_dist" = Free_max_div,
 		    "Shapes" = Free_max_shapes,
