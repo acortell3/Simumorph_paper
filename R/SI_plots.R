@@ -32,17 +32,20 @@ dens_AtoA_mdi_ci$y[nrow(dens_AtoA_mdi_ci)] <- 0
 dens_AtoA_md_ci$y[1] <- 0
 dens_AtoA_md_ci$y[nrow(dens_AtoA_md_ci)] <- 0
 
+png("../Figures/SI_figures/SI2/Fig_1.png", res = 100, height = 1000, width = 1000)
 par(mfrow = c(1,2))
-plot(x=dens_AtoA_mdi$x, y=dens_AtoA_mdi$y, xlab = "Timestep of max divergence", col = "blue", lwd = 1.5, main = "Point of max Procrustes distance", type = "l", ylab = "value")
+plot(x=dens_AtoA_mdi$x, y=dens_AtoA_mdi$y, xlab = "Timestep of max divergence", col = "blue", lwd = 1.5, main = "Max divergence (AtoA)", type = "l", ylab = "value")
 polygon(x=dens_AtoA_mdi$x, y=dens_AtoA_mdi$y, col = "lightblue1", border = NA)
 polygon(x=dens_AtoA_mdi_ci$x, y=dens_AtoA_mdi_ci$y, col = "lightblue3", border = NA)
 polygon(x=dens_AtoA_mdi$x, y=dens_AtoA_mdi$y, col = adjustcolor("blue", alpha = 0), border = "black")
 lines(x = rep(mean(dens_AtoA_mdi$x),2), y = c(0,dens_AtoA_mdi$y[which.min(abs(dens_AtoA_mdi$x - mean(dens_AtoA_mdi$x)))]), col = "navyblue", lty = 1.5)
-plot(x=dens_AtoA_md$x, y = dens_AtoA_md$y, xlab = "Max Procrustes distance", col = "blue", lwd = 1.5, main = "Max Procrustes distance", type = "l", ylab = "value")
+plot(x=dens_AtoA_md$x, y = dens_AtoA_md$y, xlab = "Max Procrustes distance", col = "blue", lwd = 1.5, main = "Max Procrustes distance (AtoA)", type = "l", ylab = "value")
 polygon(x=dens_AtoA_md$x, y=dens_AtoA_md$y, col = "lightblue1", border = NA)
 polygon(x=dens_AtoA_md_ci$x, y=dens_AtoA_md_ci$y, col = "lightblue3", border = NA)
 polygon(x=dens_AtoA_md$x, y=dens_AtoA_md$y, col = adjustcolor("blue", alpha = 0), border = "black")
 lines(x = rep(mean(dens_AtoA_md$x),2), y = c(0,dens_AtoA_md$y[which.min(abs(dens_AtoA_md$x - mean(dens_AtoA_md$x)))]), col = "navyblue", lty = 1.5)
+
+dev.off()
 
 ################ EXTENDED SIMULATIONS AtoB
 ## When do we reach maximum convergence? Need Procrustes distances, time of max convergence, and shapes themselves
@@ -74,17 +77,20 @@ dens_AtoB_mdi_ci$y[nrow(dens_AtoB_mdi_ci)] <- 0
 dens_AtoB_md_ci$y[1] <- 0
 dens_AtoB_md_ci$y[nrow(dens_AtoB_md_ci)] <- 0
 
+png("../Figures/SI_figures/SI2/Fig_2.png", res = 100, height = 1000, width = 1000)
 par(mfrow = c(1,2))
-plot(x=dens_AtoB_mdi$x, y=dens_AtoB_mdi$y, xlab = "Timestep of max convergence", col = "blue", lwd = 1.5, main = "Point of max convergence", type = "l", ylab = "value")
+plot(x=dens_AtoB_mdi$x, y=dens_AtoB_mdi$y, xlab = "Timestep of max convergence", col = "blue", lwd = 1.5, main = "Max convergence (AtoB)", type = "l", ylab = "value")
 polygon(x=dens_AtoB_mdi$x, y=dens_AtoB_mdi$y, col = "lightblue1", border = NA)
 polygon(x=dens_AtoB_mdi_ci$x, y=dens_AtoB_mdi_ci$y, col = "lightblue3", border = NA)
 polygon(x=dens_AtoB_mdi$x, y=dens_AtoB_mdi$y, col = adjustcolor("blue", alpha = 0), border = "black")
 lines(x = rep(mean(dens_AtoB_mdi$x),2), y = c(0,dens_AtoB_mdi$y[which.min(abs(dens_AtoB_mdi$x - mean(dens_AtoB_mdi$x)))]), col = "navyblue", lty = 1.5)
-plot(x=dens_AtoB_md$x, y = dens_AtoB_md$y, xlab = "Max convergence distance", col = "blue", lwd = 1.5, main = "Max convergence", type = "l", ylab = "value")
+plot(x=dens_AtoB_md$x, y = dens_AtoB_md$y, xlab = "Max convergence distance", col = "blue", lwd = 1.5, main = "Min Procrustes distance (AtoB)", type = "l", ylab = "value")
 polygon(x=dens_AtoB_md$x, y=dens_AtoB_md$y, col = "lightblue1", border = NA)
 polygon(x=dens_AtoB_md_ci$x, y=dens_AtoB_md_ci$y, col = "lightblue3", border = NA)
 polygon(x=dens_AtoB_md$x, y=dens_AtoB_md$y, col = adjustcolor("blue", alpha = 0), border = "black")
 lines(x = rep(mean(dens_AtoB_md$x),2), y = c(0,dens_AtoB_md$y[which.min(abs(dens_AtoB_md$x - mean(dens_AtoB_md$x)))]), col = "navyblue", lty = 1.5)
+
+dev.off()
 
 ################ EXTENDED SIMULATIONS AtoMult
 
@@ -118,19 +124,19 @@ xlab_n <- rep("",nrow(Multa_G1_vc))
 sel_types <- order(Multa_G1_vc$Appearances, decreasing = TRUE)[1:5]
 xlab_n[sel_types] <- as.character(Multa_G1_vc$Type[sel_types])
 
+png("../Figures/SI_figures/SI2/Fig_3.png", res = 140, height = 1200, width = 1200)
 layout(matrix(c(1,2,3,3),ncol = 2, byrow = T))
-plot(x=dens_Multa_G1_fd$x, y=dens_Multa_G1_fd$y, xlab = "Timestep to first different type", col = "blue", lwd = 1.5, main = "First different type", type = "l", ylab = "value")
+plot(x=dens_Multa_G1_fd$x, y=dens_Multa_G1_fd$y, xlab = "Timestep to first different type", col = "blue", lwd = 1.5, main = "First different type (AtoMulta_G1)", type = "l", ylab = "value")
 polygon(x=dens_Multa_G1_fd$x, y=dens_Multa_G1_fd$y, col = "lightblue1", border = NA)
 polygon(x=dens_Multa_G1_fd_ci$x, y=dens_Multa_G1_fd_ci$y, col = "lightblue3", border = NA)
 polygon(x=dens_Multa_G1_fd$x, y=dens_Multa_G1_fd$y, col = adjustcolor("blue", alpha = 0), border = "black")
 lines(x = rep(mean(dens_Multa_G1_fd$x),2), y = c(0,dens_Multa_G1_fd$y[which.min(abs(dens_Multa_G1_fd$x - mean(dens_Multa_G1_fd$x)))]), col = "navyblue", lty = 1.5)
 
-par(mar = c(1,1,2,1))
-wordcloud(words = as.character(Multa_G1_vc$Type), freq = Multa_G1_vc$Appearances, scale = c(2,0.5), colors = brewer.pal(8, "Dark2"), random.order = F)
+wordcloud(words = as.character(Multa_G1_vc$Type), freq = Multa_G1_vc$Appearances, scale = c(2,0.5), colors = brewer.pal(8, "Dark2"), random.order = T)
 title("Type frequency")
 
-par(mar = c(5.1,4.1,4.1,2.1))
 barplot(Multa_G1_vc$Appearances, names.arg = xlab_n, las = 2, col = "gold4", main = "Types present in the simulation", cex.names = 0.6)
+dev.off()
 
 ## G2a
 
@@ -158,24 +164,24 @@ xlab_n <- rep("",nrow(Multa_G2_vc))
 sel_types <- order(Multa_G2_vc$Appearances, decreasing = TRUE)[1:5]
 xlab_n[sel_types] <- as.character(Multa_G2_vc$Type[sel_types])
 
+png("../Figures/SI_figures/SI2/Fig_4.png", res = 140, height = 1200, width = 1200)
 layout(matrix(c(1,2,3,3),ncol = 2, byrow = T))
-plot(x=dens_Multa_G2_fd$x, y=dens_Multa_G2_fd$y, xlab = "Timestep to first different type", col = "blue", lwd = 1.5, main = "First different type", type = "l", ylab = "value")
+plot(x=dens_Multa_G2_fd$x, y=dens_Multa_G2_fd$y, xlab = "Timestep to first different type", col = "blue", lwd = 1.5, main = "First different type (AtoMulta G2)", type = "l", ylab = "value")
 polygon(x=dens_Multa_G2_fd$x, y=dens_Multa_G2_fd$y, col = "lightblue1", border = NA)
 polygon(x=dens_Multa_G2_fd_ci$x, y=dens_Multa_G2_fd_ci$y, col = "lightblue3", border = NA)
 polygon(x=dens_Multa_G2_fd$x, y=dens_Multa_G2_fd$y, col = adjustcolor("blue", alpha = 0), border = "black")
 lines(x = rep(mean(dens_Multa_G2_fd$x),2), y = c(0,dens_Multa_G2_fd$y[which.min(abs(dens_Multa_G2_fd$x - mean(dens_Multa_G2_fd$x)))]), col = "navyblue", lty = 1.5)
 
-par(mar = c(1,1,2,1))
-wordcloud(words = as.character(Multa_G2_vc$Type), freq = Multa_G2_vc$Appearances, scale = c(2,0.5), colors = brewer.pal(8, "Dark2"), random.order = F)
+wordcloud(words = as.character(Multa_G2_vc$Type), freq = Multa_G2_vc$Appearances, scale = c(2,0.5), colors = brewer.pal(8, "Dark2"), random.order = T)
 title("Type frequency")
 
-par(mar = c(5.1,4.1,4.1,2.1))
 barplot(Multa_G2_vc$Appearances, names.arg = xlab_n, las = 2, col = "gold4", main = "Types present in the simulation", cex.names = 0.6)
+dev.off()
 
 ## G9a
 
 SI_AtoMulta_G9 <- readRDS("../SI_results/SI_AtoMulta_G9_res.rds")
-Multa_G9_fd <- sapply(SI_AtoMulta_G9, function(x) min(which(x != x[1]))) ## First element different from 1
+#Multa_G9_fd <- sapply(SI_AtoMulta_G9, function(x) min(which(x != x[1]))) ## First element different from 1
 Multa_G9_dc <- sapply(SI_AtoMulta_G9, function(x) length(unique(x))) ## How many different types 
 Multa_G9_vc <- as.data.frame(table(unlist(SI_AtoMulta_G9))) ## Count of how many appearances of each
 colnames(Multa_G9_vc) <- c("Type", "Appearances")
@@ -198,19 +204,19 @@ xlab_n <- rep("",nrow(Multa_G9_vc))
 sel_types <- order(Multa_G9_vc$Appearances, decreasing = TRUE)[1:5]
 xlab_n[sel_types] <- as.character(Multa_G9_vc$Type[sel_types])
 
+png("../Figures/SI_figures/SI2/Fig_5.png", res = 140, height = 1200, width = 1200)
 layout(matrix(c(1,2,3,3),ncol = 2, byrow = T))
-plot(x=dens_Multa_G9_fd$x, y=dens_Multa_G9_fd$y, xlab = "Timestep to first different type", col = "blue", lwd = 1.5, main = "First different type", type = "l", ylab = "value")
+plot(x=dens_Multa_G9_fd$x, y=dens_Multa_G9_fd$y, xlab = "Timestep to first different type", col = "blue", lwd = 1.5, main = "First different type (AtoMulta G9)", type = "l", ylab = "value")
 polygon(x=dens_Multa_G9_fd$x, y=dens_Multa_G9_fd$y, col = "lightblue1", border = NA)
 polygon(x=dens_Multa_G9_fd_ci$x, y=dens_Multa_G9_fd_ci$y, col = "lightblue3", border = NA)
 polygon(x=dens_Multa_G9_fd$x, y=dens_Multa_G9_fd$y, col = adjustcolor("blue", alpha = 0), border = "black")
 lines(x = rep(mean(dens_Multa_G9_fd$x),2), y = c(0,dens_Multa_G9_fd$y[which.min(abs(dens_Multa_G9_fd$x - mean(dens_Multa_G9_fd$x)))]), col = "navyblue", lty = 1.5)
 
-par(mar = c(1,1,2,1))
-wordcloud(words = as.character(Multa_G9_vc$Type), freq = Multa_G9_vc$Appearances, scale = c(2,0.5), colors = brewer.pal(8, "Dark2"), random.order = F)
+wordcloud(words = as.character(Multa_G9_vc$Type), freq = Multa_G9_vc$Appearances, scale = c(2,0.5), colors = brewer.pal(8, "Dark2"), random.order = T)
 title("Type frequency")
 
-par(mar = c(5.1,4.1,4.1,2.1))
 barplot(Multa_G9_vc$Appearances, names.arg = xlab_n, las = 2, col = "gold4", main = "Types present in the simulation", cex.names = 0.6)
+dev.off()
 
 ## G18a
 
@@ -284,19 +290,19 @@ xlab_n <- rep("",nrow(Multb_G1_vc))
 sel_types <- order(Multb_G1_vc$Appearances, decreasing = TRUE)[1:5]
 xlab_n[sel_types] <- as.character(Multb_G1_vc$Type[sel_types])
 
+png("../Figures/SI_figures/SI2/Fig_6.png", res = 140, height = 1200, width = 1200)
 layout(matrix(c(1,2,3,3),ncol = 2, byrow = T))
-plot(x=dens_Multb_G1_fd$x, y=dens_Multb_G1_fd$y, xlab = "Timestep to first different type", col = "blue", lwd = 1.5, main = "First different type", type = "l", ylab = "value")
+plot(x=dens_Multb_G1_fd$x, y=dens_Multb_G1_fd$y, xlab = "Timestep to first different type", col = "blue", lwd = 1.5, main = "First different type (AtoMultb G1)", type = "l", ylab = "value")
 polygon(x=dens_Multb_G1_fd$x, y=dens_Multb_G1_fd$y, col = "lightblue1", border = NA)
 polygon(x=dens_Multb_G1_fd_ci$x, y=dens_Multb_G1_fd_ci$y, col = "lightblue3", border = NA)
 polygon(x=dens_Multb_G1_fd$x, y=dens_Multb_G1_fd$y, col = adjustcolor("blue", alpha = 0), border = "black")
 lines(x = rep(mean(dens_Multb_G1_fd$x),2), y = c(0,dens_Multb_G1_fd$y[which.min(abs(dens_Multb_G1_fd$x - mean(dens_Multb_G1_fd$x)))]), col = "navyblue", lty = 1.5)
 
-par(mar = c(1,1,2,1))
-wordcloud(words = as.character(Multb_G1_vc$Type), freq = Multb_G1_vc$Appearances, scale = c(2,0.5), colors = brewer.pal(8, "Dark2"), random.order = F)
+wordcloud(words = as.character(Multb_G1_vc$Type), freq = Multb_G1_vc$Appearances, scale = c(2,0.5), colors = brewer.pal(8, "Dark2"), random.order = T)
 title("Type frequency")
 
-par(mar = c(5.1,4.1,4.1,2.1))
 barplot(Multb_G1_vc$Appearances, names.arg = xlab_n, las = 2, col = "gold4", main = "Types present in the simulation", cex.names = 0.6)
+dev.off()
 
 ## G2b
 
@@ -324,19 +330,19 @@ xlab_n <- rep("",nrow(Multb_G2_vc))
 sel_types <- order(Multb_G2_vc$Appearances, decreasing = TRUE)[1:5]
 xlab_n[sel_types] <- as.character(Multb_G2_vc$Type[sel_types])
 
+png("../Figures/SI_figures/SI2/Fig_7.png", res = 130, height = 1200, width = 1200)
 layout(matrix(c(1,2,3,3),ncol = 2, byrow = T))
-plot(x=dens_Multb_G2_fd$x, y=dens_Multb_G2_fd$y, xlab = "Timestep to first different type", col = "blue", lwd = 1.5, main = "First different type", type = "l", ylab = "value")
+plot(x=dens_Multb_G2_fd$x, y=dens_Multb_G2_fd$y, xlab = "Timestep to first different type", col = "blue", lwd = 1.5, main = "First different type (AtoMultb G2)", type = "l", ylab = "value")
 polygon(x=dens_Multb_G2_fd$x, y=dens_Multb_G2_fd$y, col = "lightblue1", border = NA)
 polygon(x=dens_Multb_G2_fd_ci$x, y=dens_Multb_G2_fd_ci$y, col = "lightblue3", border = NA)
 polygon(x=dens_Multb_G2_fd$x, y=dens_Multb_G2_fd$y, col = adjustcolor("blue", alpha = 0), border = "black")
 lines(x = rep(mean(dens_Multb_G2_fd$x),2), y = c(0,dens_Multb_G2_fd$y[which.min(abs(dens_Multb_G2_fd$x - mean(dens_Multb_G2_fd$x)))]), col = "navyblue", lty = 1.5)
 
-par(mar = c(1,1,2,1))
-wordcloud(words = as.character(Multb_G2_vc$Type), freq = Multb_G2_vc$Appearances, scale = c(2,0.5), colors = brewer.pal(8, "Dark2"), random.order = F)
+wordcloud(words = as.character(Multb_G2_vc$Type), freq = Multb_G2_vc$Appearances, scale = c(2,0.5), colors = brewer.pal(8, "Dark2"), random.order = T)
 title("Type frequency")
 
-par(mar = c(5.1,4.1,4.1,2.1))
 barplot(Multb_G2_vc$Appearances, names.arg = xlab_n, las = 2, col = "gold4", main = "Types present in the simulation", cex.names = 0.6)
+dev.off()
 
 ## G9b
 
@@ -364,19 +370,19 @@ xlab_n <- rep("",nrow(Multb_G9_vc))
 sel_types <- order(Multb_G9_vc$Appearances, decreasing = TRUE)[1:5]
 xlab_n[sel_types] <- as.character(Multb_G9_vc$Type[sel_types])
 
+png("../Figures/SI_figures/SI2/Fig_8.png", res = 140, height = 1200, width = 1200)
 layout(matrix(c(1,2,3,3),ncol = 2, byrow = T))
-plot(x=dens_Multb_G9_fd$x, y=dens_Multb_G9_fd$y, xlab = "Timestep to first different type", col = "blue", lwd = 1.5, main = "First different type", type = "l", ylab = "value")
+plot(x=dens_Multb_G9_fd$x, y=dens_Multb_G9_fd$y, xlab = "Timestep to first different type", col = "blue", lwd = 1.5, main = "First different type (AtoMultb G9)", type = "l", ylab = "value")
 polygon(x=dens_Multb_G9_fd$x, y=dens_Multb_G9_fd$y, col = "lightblue1", border = NA)
 polygon(x=dens_Multb_G9_fd_ci$x, y=dens_Multb_G9_fd_ci$y, col = "lightblue3", border = NA)
 polygon(x=dens_Multb_G9_fd$x, y=dens_Multb_G9_fd$y, col = adjustcolor("blue", alpha = 0), border = "black")
 lines(x = rep(mean(dens_Multb_G9_fd$x),2), y = c(0,dens_Multb_G9_fd$y[which.min(abs(dens_Multb_G9_fd$x - mean(dens_Multb_G9_fd$x)))]), col = "navyblue", lty = 1.5)
 
-par(mar = c(1,1,2,1))
-wordcloud(words = as.character(Multb_G9_vc$Type), freq = Multb_G9_vc$Appearances, scale = c(2,0.5), colors = brewer.pal(8, "Dark2"), random.order = F)
+wordcloud(words = as.character(Multb_G9_vc$Type), freq = Multb_G9_vc$Appearances, scale = c(2,0.5), colors = brewer.pal(8, "Dark2"), random.order = T)
 title("Type frequency")
 
-par(mar = c(5.1,4.1,4.1,2.1))
 barplot(Multb_G9_vc$Appearances, names.arg = xlab_n, las = 2, col = "gold4", main = "Types present in the simulation", cex.names = 0.6)
+dev.off()
 
 ## G18b
 
@@ -404,19 +410,19 @@ xlab_n <- rep("",nrow(Multb_G18_vc))
 sel_types <- order(Multb_G18_vc$Appearances, decreasing = TRUE)[1:5]
 xlab_n[sel_types] <- as.character(Multb_G18_vc$Type[sel_types])
 
+png("../Figures/SI_figures/SI2/Fig_9.png", res = 140, height = 1200, width = 1200)
 layout(matrix(c(1,2,3,3),ncol = 2, byrow = T))
-plot(x=dens_Multb_G18_fd$x, y=dens_Multb_G18_fd$y, xlab = "Timestep to first different type", col = "blue", lwd = 1.5, main = "First different type", type = "l", ylab = "value")
+plot(x=dens_Multb_G18_fd$x, y=dens_Multb_G18_fd$y, xlab = "Timestep to first different type", col = "blue", lwd = 1.5, main = "First different type (AtoMultb G18)", type = "l", ylab = "value")
 polygon(x=dens_Multb_G18_fd$x, y=dens_Multb_G18_fd$y, col = "lightblue1", border = NA)
 polygon(x=dens_Multb_G18_fd_ci$x, y=dens_Multb_G18_fd_ci$y, col = "lightblue3", border = NA)
 polygon(x=dens_Multb_G18_fd$x, y=dens_Multb_G18_fd$y, col = adjustcolor("blue", alpha = 0), border = "black")
 lines(x = rep(mean(dens_Multb_G18_fd$x),2), y = c(0,dens_Multb_G18_fd$y[which.min(abs(dens_Multb_G18_fd$x - mean(dens_Multb_G18_fd$x)))]), col = "navyblue", lty = 1.5)
 
-par(mar = c(1,1,2,1))
-wordcloud(words = as.character(Multb_G18_vc$Type), freq = Multb_G18_vc$Appearances, scale = c(2,0.5), colors = brewer.pal(8, "Dark2"), random.order = F)
+wordcloud(words = as.character(Multb_G18_vc$Type), freq = Multb_G18_vc$Appearances, scale = c(2,0.5), colors = brewer.pal(8, "Dark2"), random.order = T)
 title("Type frequency")
 
-par(mar = c(5.1,4.1,4.1,2.1))
 barplot(Multb_G18_vc$Appearances, names.arg = xlab_n, las = 2, col = "gold4", main = "Types present in the simulation", cex.names = 0.6)
+dev.off()
 
 
 ################ EXTENDED SIMULATIONS AtoFree
@@ -464,16 +470,17 @@ dens_Free_max_pd_ci$y[nrow(dens_Free_max_pd_ci)] <- 0
 dens_Free_min_pd_ci$y[1] <- 0
 dens_Free_min_pd_ci$y[nrow(dens_Free_min_pd_ci)] <- 0
 
+png("../Figures/SI_figures/SI2/Fig_10.png", res = 140, height = 1200, width = 1200)
 par(mfrow = c(2,2))
 
 ## Divergence times
 
-plot(x=dens_Free_max$x, y=dens_Free_max$y, xlab = "Timestep of max divergence", col = "blue", lwd = 1.5, main = "Point of max divergence", type = "l", ylab = "value")
+plot(x=dens_Free_max$x, y=dens_Free_max$y, xlab = "Timestep of max divergence", col = "blue", lwd = 1.5, main = "Max divergence Free simulation", type = "l", ylab = "value")
 polygon(x=dens_Free_max$x, y=dens_Free_max$y, col = "lightblue1", border = NA)
 polygon(x=dens_Free_max_ci$x, y=dens_Free_max_ci$y, col = "lightblue3", border = NA)
 polygon(x=dens_Free_max$x, y=dens_Free_max$y, col = adjustcolor("blue", alpha = 0), border = "black")
 lines(x = rep(mean(dens_Free_max$x),2), y = c(0,dens_Free_max$y[which.min(abs(dens_Free_max$x - mean(dens_Free_max$x)))]), col = "navyblue", lty = 1.5)
-plot(x=dens_Free_min$x, y = dens_Free_min$y, xlab = "Timestep of first divergence", col = "blue", lwd = 1.5, main = "Point of first divergence", type = "l", ylab = "value")
+plot(x=dens_Free_min$x, y = dens_Free_min$y, xlab = "Timestep of first divergence", col = "blue", lwd = 1.5, main = "First divergence Free simulation", type = "l", ylab = "value")
 polygon(x=dens_Free_min$x, y=dens_Free_min$y, col = "lightblue1", border = NA)
 polygon(x=dens_Free_min_ci$x, y=dens_Free_min_ci$y, col = "lightblue3", border = NA)
 polygon(x=dens_Free_min$x, y=dens_Free_min$y, col = adjustcolor("blue", alpha = 0), border = "black")
@@ -481,13 +488,15 @@ lines(x = rep(mean(dens_Free_min$x),2), y = c(0,dens_Free_min$y[which.min(abs(de
 
 ## Procrustes distances
 
-plot(x=dens_Free_max_pd$x, y=dens_Free_max_pd$y, xlab = "Maximum Procrustes distance", col = "blue", lwd = 1.5, main = "Max distance to morphospace", type = "l", ylab = "value")
+plot(x=dens_Free_max_pd$x, y=dens_Free_max_pd$y, xlab = "Maximum Procrustes distance", col = "blue", lwd = 1.5, main = "Max distance to morphospace Free", type = "l", ylab = "value")
 polygon(x=dens_Free_max_pd$x, y=dens_Free_max_pd$y, col = "lightblue1", border = NA)
 polygon(x=dens_Free_max_pd_ci$x, y=dens_Free_max_pd_ci$y, col = "lightblue3", border = NA)
 polygon(x=dens_Free_max_pd$x, y=dens_Free_max_pd$y, col = adjustcolor("blue", alpha = 0), border = "black")
 lines(x = rep(mean(dens_Free_max_pd$x),2), y = c(0,dens_Free_max_pd$y[which.min(abs(dens_Free_max_pd$x - mean(dens_Free_max_pd$x)))]), col = "navyblue", lty = 1.5)
-plot(x=dens_Free_min_pd$x, y = dens_Free_min_pd$y, xlab = "Minimum Procrustes distance", col = "blue", lwd = 1.5, main = "Min distance to morphospace", type = "l", ylab = "value")
+plot(x=dens_Free_min_pd$x, y = dens_Free_min_pd$y, xlab = "Minimum Procrustes distance", col = "blue", lwd = 1.5, main = "Min distance to morphospace Free", type = "l", ylab = "value")
 polygon(x=dens_Free_min_pd$x, y=dens_Free_min_pd$y, col = "lightblue1", border = NA)
 polygon(x=dens_Free_min_pd_ci$x, y=dens_Free_min_pd_ci$y, col = "lightblue3", border = NA)
 polygon(x=dens_Free_min_pd$x, y=dens_Free_min_pd$y, col = adjustcolor("blue", alpha = 0), border = "black")
 lines(x = rep(mean(dens_Free_min_pd$x),2), y = c(0,dens_Free_min_pd$y[which.min(abs(dens_Free_min_pd$x - mean(dens_Free_min_pd$x)))]), col = "navyblue", lty = 1.5)
+
+dev.off()
