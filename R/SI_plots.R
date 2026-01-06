@@ -32,7 +32,7 @@ dens_AtoA_mdi_ci$y[nrow(dens_AtoA_mdi_ci)] <- 0
 dens_AtoA_md_ci$y[1] <- 0
 dens_AtoA_md_ci$y[nrow(dens_AtoA_md_ci)] <- 0
 
-png("../Figures/SI_figures/SI2/Fig_1.png", res = 100, height = 1000, width = 1000)
+png("../SI_figures/SI3/Fig_1_SI3.png", res = 100, height = 1000, width = 1000)
 par(mfrow = c(1,2))
 plot(x=dens_AtoA_mdi$x, y=dens_AtoA_mdi$y, xlab = "Timestep of max divergence", col = "blue", lwd = 1.5, main = "Max divergence (AtoA)", type = "l", ylab = "value")
 polygon(x=dens_AtoA_mdi$x, y=dens_AtoA_mdi$y, col = "lightblue1", border = NA)
@@ -77,7 +77,7 @@ dens_AtoB_mdi_ci$y[nrow(dens_AtoB_mdi_ci)] <- 0
 dens_AtoB_md_ci$y[1] <- 0
 dens_AtoB_md_ci$y[nrow(dens_AtoB_md_ci)] <- 0
 
-png("../Figures/SI_figures/SI2/Fig_2.png", res = 100, height = 1000, width = 1000)
+png("../SI_figures/SI3/Fig_2_SI3.png", res = 100, height = 1000, width = 1000)
 par(mfrow = c(1,2))
 plot(x=dens_AtoB_mdi$x, y=dens_AtoB_mdi$y, xlab = "Timestep of max convergence", col = "blue", lwd = 1.5, main = "Max convergence (AtoB)", type = "l", ylab = "value")
 polygon(x=dens_AtoB_mdi$x, y=dens_AtoB_mdi$y, col = "lightblue1", border = NA)
@@ -124,7 +124,7 @@ xlab_n <- rep("",nrow(Multa_G1_vc))
 sel_types <- order(Multa_G1_vc$Appearances, decreasing = TRUE)[1:5]
 xlab_n[sel_types] <- as.character(Multa_G1_vc$Type[sel_types])
 
-png("../Figures/SI_figures/SI2/Fig_3.png", res = 140, height = 1200, width = 1200)
+png("../SI_figures/SI3/Fig_3_SI3.png", res = 140, height = 1200, width = 1200)
 layout(matrix(c(1,2,3,3),ncol = 2, byrow = T))
 plot(x=dens_Multa_G1_fd$x, y=dens_Multa_G1_fd$y, xlab = "Timestep to first different type", col = "blue", lwd = 1.5, main = "First different type (AtoMulta_G1)", type = "l", ylab = "value")
 polygon(x=dens_Multa_G1_fd$x, y=dens_Multa_G1_fd$y, col = "lightblue1", border = NA)
@@ -164,7 +164,7 @@ xlab_n <- rep("",nrow(Multa_G2_vc))
 sel_types <- order(Multa_G2_vc$Appearances, decreasing = TRUE)[1:5]
 xlab_n[sel_types] <- as.character(Multa_G2_vc$Type[sel_types])
 
-png("../Figures/SI_figures/SI2/Fig_4.png", res = 140, height = 1200, width = 1200)
+png("../SI_figures/SI3/Fig_4_SI3.png", res = 140, height = 1200, width = 1200)
 layout(matrix(c(1,2,3,3),ncol = 2, byrow = T))
 plot(x=dens_Multa_G2_fd$x, y=dens_Multa_G2_fd$y, xlab = "Timestep to first different type", col = "blue", lwd = 1.5, main = "First different type (AtoMulta G2)", type = "l", ylab = "value")
 polygon(x=dens_Multa_G2_fd$x, y=dens_Multa_G2_fd$y, col = "lightblue1", border = NA)
@@ -204,7 +204,7 @@ xlab_n <- rep("",nrow(Multa_G9_vc))
 sel_types <- order(Multa_G9_vc$Appearances, decreasing = TRUE)[1:5]
 xlab_n[sel_types] <- as.character(Multa_G9_vc$Type[sel_types])
 
-png("../Figures/SI_figures/SI2/Fig_5.png", res = 140, height = 1200, width = 1200)
+png("../SI_figures/SI3/Fig_5_SI3.png", res = 140, height = 1200, width = 1200)
 layout(matrix(c(1,2,3,3),ncol = 2, byrow = T))
 plot(x=dens_Multa_G9_fd$x, y=dens_Multa_G9_fd$y, xlab = "Timestep to first different type", col = "blue", lwd = 1.5, main = "First different type (AtoMulta G9)", type = "l", ylab = "value")
 polygon(x=dens_Multa_G9_fd$x, y=dens_Multa_G9_fd$y, col = "lightblue1", border = NA)
@@ -290,7 +290,7 @@ xlab_n <- rep("",nrow(Multb_G1_vc))
 sel_types <- order(Multb_G1_vc$Appearances, decreasing = TRUE)[1:5]
 xlab_n[sel_types] <- as.character(Multb_G1_vc$Type[sel_types])
 
-png("../Figures/SI_figures/SI2/Fig_6.png", res = 140, height = 1200, width = 1200)
+png("../SI_figures/SI3/Fig_6_SI3.png", res = 140, height = 1200, width = 1200)
 layout(matrix(c(1,2,3,3),ncol = 2, byrow = T))
 plot(x=dens_Multb_G1_fd$x, y=dens_Multb_G1_fd$y, xlab = "Timestep to first different type", col = "blue", lwd = 1.5, main = "First different type (AtoMultb G1)", type = "l", ylab = "value")
 polygon(x=dens_Multb_G1_fd$x, y=dens_Multb_G1_fd$y, col = "lightblue1", border = NA)
@@ -330,7 +330,7 @@ xlab_n <- rep("",nrow(Multb_G2_vc))
 sel_types <- order(Multb_G2_vc$Appearances, decreasing = TRUE)[1:5]
 xlab_n[sel_types] <- as.character(Multb_G2_vc$Type[sel_types])
 
-png("../Figures/SI_figures/SI2/Fig_7.png", res = 130, height = 1200, width = 1200)
+png("../SI_figures/SI3/Fig_7_SI3.png", res = 130, height = 1200, width = 1200)
 layout(matrix(c(1,2,3,3),ncol = 2, byrow = T))
 plot(x=dens_Multb_G2_fd$x, y=dens_Multb_G2_fd$y, xlab = "Timestep to first different type", col = "blue", lwd = 1.5, main = "First different type (AtoMultb G2)", type = "l", ylab = "value")
 polygon(x=dens_Multb_G2_fd$x, y=dens_Multb_G2_fd$y, col = "lightblue1", border = NA)
@@ -370,7 +370,7 @@ xlab_n <- rep("",nrow(Multb_G9_vc))
 sel_types <- order(Multb_G9_vc$Appearances, decreasing = TRUE)[1:5]
 xlab_n[sel_types] <- as.character(Multb_G9_vc$Type[sel_types])
 
-png("../Figures/SI_figures/SI2/Fig_8.png", res = 140, height = 1200, width = 1200)
+png("../SI_figures/SI3/Fig_8_SI3.png", res = 140, height = 1200, width = 1200)
 layout(matrix(c(1,2,3,3),ncol = 2, byrow = T))
 plot(x=dens_Multb_G9_fd$x, y=dens_Multb_G9_fd$y, xlab = "Timestep to first different type", col = "blue", lwd = 1.5, main = "First different type (AtoMultb G9)", type = "l", ylab = "value")
 polygon(x=dens_Multb_G9_fd$x, y=dens_Multb_G9_fd$y, col = "lightblue1", border = NA)
@@ -410,7 +410,7 @@ xlab_n <- rep("",nrow(Multb_G18_vc))
 sel_types <- order(Multb_G18_vc$Appearances, decreasing = TRUE)[1:5]
 xlab_n[sel_types] <- as.character(Multb_G18_vc$Type[sel_types])
 
-png("../Figures/SI_figures/SI2/Fig_9.png", res = 140, height = 1200, width = 1200)
+png("../SI_figures/SI3/Fig_9_SI3.png", res = 140, height = 1200, width = 1200)
 layout(matrix(c(1,2,3,3),ncol = 2, byrow = T))
 plot(x=dens_Multb_G18_fd$x, y=dens_Multb_G18_fd$y, xlab = "Timestep to first different type", col = "blue", lwd = 1.5, main = "First different type (AtoMultb G18)", type = "l", ylab = "value")
 polygon(x=dens_Multb_G18_fd$x, y=dens_Multb_G18_fd$y, col = "lightblue1", border = NA)
@@ -470,7 +470,7 @@ dens_Free_max_pd_ci$y[nrow(dens_Free_max_pd_ci)] <- 0
 dens_Free_min_pd_ci$y[1] <- 0
 dens_Free_min_pd_ci$y[nrow(dens_Free_min_pd_ci)] <- 0
 
-png("../Figures/SI_figures/SI2/Fig_10.png", res = 140, height = 1200, width = 1200)
+png("../SI_figures/SI3/Fig_10_SI3.png", res = 140, height = 1200, width = 1200)
 par(mfrow = c(2,2))
 
 ## Divergence times

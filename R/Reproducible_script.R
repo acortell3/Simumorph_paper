@@ -112,7 +112,7 @@ set.seed(seed)
 AtoBc <- simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = which(rownames(amp_pha_mat)=="G2_m_G2"), target = which(rownames(amp_pha_mat)=="G18_m_G18"), method = "AtoB", sim = sims, npts = npts, only.shapes = F, a = 0.5, e = 0.5, f = 100, max.attempts = 500, speedAtoB = -0.002)
 
 ## Plot
-png("../Figures/SI_figures/Fig_1_SI.png", res = 50, height = 1500, width = 1500)
+png("../SI_figures/SI2/Fig_1_SI2.png", res = 50, height = 1500, width = 1500)
 layout(mat)
 for (i in 1:sims){
 	plot(AtoBc$Shapes[[i]], type = "l", lwd = 1.5, cex.main = 2, xlab = "", ylab = "", bty = "n", main = paste0("t = ",i))
@@ -146,7 +146,7 @@ for (i in 1:sims){
 
 
 ## Plot
-png("../Figures/SI_figures/Fig_2_SI.png", res = 50, height = 1500, width = 1500)
+png("../SI_figures/SI2/Fig_2_SI2.png", res = 50, height = 1500, width = 1500)
 layout(mat)
 for (i in 1:sims){
 	plot(AtoMult_G1$Shapes[[i]], type = "l", lwd = 1.5, cex.main = 2, xlab = "", ylab = "", bty = "n", main = paste0("t = ",i," / S = ", pdist_G1[i,1]))
@@ -193,7 +193,7 @@ for (i in 1:sims){
 
 
 ## Plot
-png("../Figures/SI_figures/Fig_4_SI.png", res = 50, height = 1500, width = 1500)
+png("../SI_figures/SI2/Fig_4_SI2.png", res = 50, height = 1500, width = 1500)
 layout(mat)
 for (i in 1:sims){
 	plot(AtoMult_G9$Shapes[[i]], type = "l", lwd = 1.5, cex.main = 2, xlab = "", ylab = "", bty = "n", main = paste0("t = ",i," / S = ", pdist_G9[i,1]))
@@ -269,7 +269,7 @@ for (i in 1:sims){
 
 
 ## Plot
-png("../Figures/SI_figures/Fig_3_SI.png", res = 50, height = 1500, width = 1500)
+png("../SI_figures/SI2/Fig_3_SI2.png", res = 50, height = 1500, width = 1500)
 layout(mat)
 for (i in 1:sims){
 	plot(AtoMult_G1_SI$Shapes[[i]], type = "l", lwd = 1.5, cex.main = 2, xlab = "", ylab = "", bty = "n", main = paste0("t = ",i," / S = ", pdist_G1_SI[i,1]))
@@ -325,7 +325,7 @@ for (i in 1:sims){
 
 
 ## Plot
-png("../Figures/SI_figures/Fig_5_SI.png", res = 50, height = 1500, width = 1500)
+png("../SI_figures/SI2/Fig_5_SI2.png", res = 50, height = 1500, width = 1500)
 layout(mat)
 for (i in 1:sims){
 	plot(AtoMult_G9_SI$Shapes[[i]], type = "l", lwd = 1.5, cex.main = 2, xlab = "", ylab = "", bty = "n", main = paste0("t = ",i," / S = ", pdist_G9_SI[i,1])) 

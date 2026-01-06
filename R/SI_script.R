@@ -46,8 +46,6 @@ saveRDS(SI_AtoA_res, "../SI_results/SI_AtoA_res.rds")
 
 SI_AtoB_fun <- function(i) {simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = which(rownames(amp_pha_mat)=="G2_m_G2"), target = which(rownames(amp_pha_mat)=="G18_m_G18"), method = "AtoB", sim = 500, npts = npts, only.shapes = F, a = 0.5, e = 0.5, f = 100, max.attempts = 500, speedAtoB = 0.0035)}
 
-set.seed(seed)
-
 ## !!!!!! WARNING!!!!!!!! Windows users, not that mclapply only works on Linux. You'll have to adapt this to foreach
 SI_AtoB <- mclapply(1:n_iter, SI_AtoB_fun, mc.cores = ncores)
 
@@ -76,8 +74,6 @@ c_f <- 50
 
 SI_AtoMulta_G1_fun <- function(i) {simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = which(rownames(amp_pha_mat) == "G1.1_m_G1.1"), target = targets_multi, method = "AtoMult", sim = sims, npts = npts, only.shapes = F, a = c_a, e = 0.05, f = c_f)}
 
-set.seed(seed)
-
 ## !!!!!! WARNING!!!!!!!! Windows users, not that mclapply only works on Linux. You'll have to adapt this to foreach
 SI_AtoMulta_G1 <- mclapply(1:n_iter, SI_AtoMulta_G1_fun, mc.cores = ncores)
 
@@ -94,8 +90,6 @@ saveRDS(SI_AtoMulta_G1_shapes, "../SI_results/SI_AtoMulta_G1_res.rds")
 #### G2
 
 SI_AtoMulta_G2_fun <- function(i) {simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = which(rownames(amp_pha_mat) == "G2_m_G2"), target = targets_multi, method = "AtoMult", sim = sims, npts = npts, only.shapes = F, a = c_a, e = 0.05, f = c_f)}
-
-set.seed(seed)
 
 ## !!!!!! WARNING!!!!!!!! Windows users, not that mclapply only works on Linux. You'll have to adapt this to foreach
 SI_AtoMulta_G2 <- mclapply(1:n_iter, SI_AtoMulta_G2_fun, mc.cores = ncores)
@@ -114,8 +108,6 @@ saveRDS(SI_AtoMulta_G2_shapes, "../SI_results/SI_AtoMulta_G2_res.rds")
 
 SI_AtoMulta_G9_fun <- function(i) {simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = which(rownames(amp_pha_mat) == "G9_m_G9"), target = targets_multi, method = "AtoMult", sim = sims, npts = npts, only.shapes = F, a = c_a, e = 0.05, f = c_f)}
 
-set.seed(seed)
-
 ## !!!!!! WARNING!!!!!!!! Windows users, not that mclapply only works on Linux. You'll have to adapt this to foreach
 SI_AtoMulta_G9 <- mclapply(1:n_iter, SI_AtoMulta_G9_fun, mc.cores = ncores)
 
@@ -132,8 +124,6 @@ saveRDS(SI_AtoMulta_G9_shapes, "../SI_results/SI_AtoMulta_G9_res.rds")
 #### G18
 ## Increased e so the sim does not crash
 SI_AtoMulta_G18_fun <- function(i) {simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = which(rownames(amp_pha_mat) == "G18_m_G18"), target = targets_multi, method = "AtoMult", sim = sims, npts = npts, only.shapes = F, a = c_a, e = 0.06, f = c_f)}
-
-set.seed(seed)
 
 ## !!!!!! WARNING!!!!!!!! Windows users, not that mclapply only works on Linux. You'll have to adapt this to foreach
 SI_AtoMulta_G18 <- mclapply(1:n_iter, SI_AtoMulta_G18_fun, mc.cores = ncores)
@@ -161,8 +151,6 @@ c_f <- 50
 
 SI_AtoMultb_G1_fun <- function(i) {simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = which(rownames(amp_pha_mat) == "G1.1_m_G1.1"), target = targets_multi, method = "AtoMult", sim = sims, npts = npts, only.shapes = F, a = c_a, e = 0.05, f = c_f)}
 
-set.seed(seed)
-
 ## !!!!!! WARNING!!!!!!!! Windows users, not that mclapply only works on Linux. You'll have to adapt this to foreach
 SI_AtoMultb_G1 <- mclapply(1:n_iter, SI_AtoMultb_G1_fun, mc.cores = ncores)
 
@@ -181,8 +169,6 @@ target_names <- rownames(amp_pha_mat)[!grepl("G2",rownames(amp_pha_mat))]
 targets_multi <- grep("G2",rownames(amp_pha_mat), invert = TRUE)
 
 SI_AtoMultb_G2_fun <- function(i) {simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = which(rownames(amp_pha_mat) == "G2_m_G2"), target = targets_multi, method = "AtoMult", sim = sims, npts = npts, only.shapes = F, a = c_a, e = 0.05, f = c_f)}
-
-set.seed(seed)
 
 ## !!!!!! WARNING!!!!!!!! Windows users, not that mclapply only works on Linux. You'll have to adapt this to foreach
 SI_AtoMultb_G2 <- mclapply(1:n_iter, SI_AtoMultb_G2_fun, mc.cores = ncores)
@@ -207,8 +193,6 @@ dyn_e <- data.frame("time" = c(1,10,20,30,40,50),
 
 SI_AtoMultb_G9_fun <- function(i) {simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = which(rownames(amp_pha_mat) == "G9_m_G9"), target = targets_multi, method = "AtoMult", sim = sims, npts = npts, only.shapes = F, a = c_a, dynamic_e = dyn_e, f = c_f)}
 
-set.seed(seed)
-
 ## !!!!!! WARNING!!!!!!!! Windows users, not that mclapply only works on Linux. You'll have to adapt this to foreach
 SI_AtoMultb_G9 <- mclapply(1:n_iter, SI_AtoMultb_G9_fun, mc.cores = ncores)
 
@@ -232,8 +216,6 @@ dyn_e <- data.frame("time" = c(1,10,20,30,40,75,90),
 
 SI_AtoMultb_G18_fun <- function(i) {simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = which(rownames(amp_pha_mat) == "G18_m_G18"), target = targets_multi, method = "AtoMult", sim = sims, npts = npts, only.shapes = F, a = c_a, dynamic_e = dyn_e, f = c_f)}
 
-set.seed(seed)
-
 ## !!!!!! WARNING!!!!!!!! Windows users, not that mclapply only works on Linux. You'll have to adapt this to foreach
 SI_AtoMultb_G18 <- mclapply(1:n_iter, SI_AtoMultb_G18_fun, mc.cores = ncores)
 
@@ -251,8 +233,6 @@ saveRDS(SI_AtoMultb_G18_shapes, "../SI_results/SI_AtoMultb_G18_res.rds")
 ## How much does it deviate? Maximum distance to the whole of the morphospace and to the initial shape
 
 SI_Free_fun <- function(i) {simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = 1, target = nrow(amp_pha_mat), method = "Free", sim = sims, npts = npts, only.shapes = F, a = 0.2, e = 0.05, f = 100, max.attempts = 500)}
-
-set.seed(seed)
 
 ## !!!!!! WARNING!!!!!!!! Windows users, not that mclapply only works on Linux. You'll have to adapt this to foreach
 SI_Free <- mclapply(1:n_iter, SI_Free_fun, mc.cores = ncores)
