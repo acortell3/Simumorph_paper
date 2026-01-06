@@ -236,7 +236,7 @@ dev.off()
 ## Prepare for density plot of first element different from 1
 ## df
 #dens_Multa_G18_fd <- data.frame("x" = density(Multa_G18_fd)$x,
-		 	       "y" = density(Multa_G18_fd)$y)
+#		 	       "y" = density(Multa_G18_fd)$y)
 
 ## cis
 #Multa_G18_fd_quant <- quantile(Multa_G18_fd, probs = c(0.025, 0.5, 0.975))
