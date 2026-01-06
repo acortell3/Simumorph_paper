@@ -5,7 +5,7 @@
 
 ################ EXTENDED SIMULATIONS AtoA
 ## 100 most distant shapes to initial shapes. Need Procrustes distances, time of max divergence, and shapes themselves
-SI_AtoA <- readRDS("../SI_results/SI_AtoA_res.rds")
+SI_AtoA <- readRDS("../SI3_results/SI_AtoA_res.rds")
 AtoA_mdi <- SI_AtoA[[1]]
 AtoA_md <- SI_AtoA[[2]]
 AtoA_shapes <- SI_AtoA[[3]]
@@ -50,7 +50,7 @@ dev.off()
 ################ EXTENDED SIMULATIONS AtoB
 ## When do we reach maximum convergence? Need Procrustes distances, time of max convergence, and shapes themselves
 
-SI_AtoB <- readRDS("../SI_results/SI_AtoB_res.rds")
+SI_AtoB <- readRDS("../SI3_results/SI_AtoB_res.rds")
 AtoB_mdi <- SI_AtoB[[1]]
 AtoB_md <- SI_AtoB[[2]]
 AtoB_shapes <- SI_AtoB[[3]]
@@ -100,7 +100,7 @@ library(wordcloud)
 
 ## G1a
 
-SI_AtoMulta_G1 <- readRDS("../SI_results/SI_AtoMulta_G1_res.rds")
+SI_AtoMulta_G1 <- readRDS("../SI3_results/SI_AtoMulta_G1_res.rds")
 Multa_G1_fd <- sapply(SI_AtoMulta_G1, function(x) min(which(x != x[1]))) ## First element different from 1
 Multa_G1_dc <- sapply(SI_AtoMulta_G1, function(x) length(unique(x))) ## How many different types 
 Multa_G1_vc <- as.data.frame(table(unlist(SI_AtoMulta_G1))) ## Count of how many appearances of each
@@ -140,7 +140,7 @@ dev.off()
 
 ## G2a
 
-SI_AtoMulta_G2 <- readRDS("../SI_results/SI_AtoMulta_G2_res.rds")
+SI_AtoMulta_G2 <- readRDS("../SI3_results/SI_AtoMulta_G2_res.rds")
 Multa_G2_fd <- sapply(SI_AtoMulta_G2, function(x) min(which(x != x[1]))) ## First element different from 1
 Multa_G2_dc <- sapply(SI_AtoMulta_G2, function(x) length(unique(x))) ## How many different types 
 Multa_G2_vc <- as.data.frame(table(unlist(SI_AtoMulta_G2))) ## Count of how many appearances of each
@@ -180,8 +180,10 @@ dev.off()
 
 ## G9a
 
-SI_AtoMulta_G9 <- readRDS("../SI_results/SI_AtoMulta_G9_res.rds")
-#Multa_G9_fd <- sapply(SI_AtoMulta_G9, function(x) min(which(x != x[1]))) ## First element different from 1
+SI_AtoMulta_G9 <- readRDS("../SI3_results/SI_AtoMulta_G9_res.rds")
+Multa_G9_fd <- sapply(SI_AtoMulta_G9, function(x) min(which(x != x[1]))) ## First element different from 1
+Multa_G9_fd[which(Multa_G9_fd == Inf)] <- NA ## For the cases where it doesn't change 
+Multa_G9_fd <- na.omit(Multa_G9_fd)
 Multa_G9_dc <- sapply(SI_AtoMulta_G9, function(x) length(unique(x))) ## How many different types 
 Multa_G9_vc <- as.data.frame(table(unlist(SI_AtoMulta_G9))) ## Count of how many appearances of each
 colnames(Multa_G9_vc) <- c("Type", "Appearances")
@@ -211,6 +213,7 @@ polygon(x=dens_Multa_G9_fd$x, y=dens_Multa_G9_fd$y, col = "lightblue1", border =
 polygon(x=dens_Multa_G9_fd_ci$x, y=dens_Multa_G9_fd_ci$y, col = "lightblue3", border = NA)
 polygon(x=dens_Multa_G9_fd$x, y=dens_Multa_G9_fd$y, col = adjustcolor("blue", alpha = 0), border = "black")
 lines(x = rep(mean(dens_Multa_G9_fd$x),2), y = c(0,dens_Multa_G9_fd$y[which.min(abs(dens_Multa_G9_fd$x - mean(dens_Multa_G9_fd$x)))]), col = "navyblue", lty = 1.5)
+text(x = 70, y = 0.08, paste0(100-length(Multa_G9_fd)," sims did not change"))
 
 wordcloud(words = as.character(Multa_G9_vc$Type), freq = Multa_G9_vc$Appearances, scale = c(2,0.5), colors = brewer.pal(8, "Dark2"), random.order = T)
 title("Type frequency")
@@ -222,8 +225,10 @@ dev.off()
 
 #### Comment the code and not use it bc it stays within one single shape for several simulations
 
-#SI_AtoMulta_G18 <- readRDS("../SI_results/SI_AtoMulta_G18_res.rds")
+#SI_AtoMulta_G18 <- readRDS("../SI3_results/SI_AtoMulta_G18_res.rds")
 #Multa_G18_fd <- sapply(SI_AtoMulta_G18, function(x) min(which(x != x[1]))) ## First element different from 1
+#Multa_G18_fd[which(Multa_G18_fd == Inf)] <- NA ## For the cases where it doesn't change 
+#Multa_G18_fd <- na.omit(Multa_G18_fd)
 #Multa_G18_dc <- sapply(SI_AtoMulta_G18, function(x) length(unique(x))) ## How many different types 
 #Multa_G18_vc <- as.data.frame(table(unlist(SI_AtoMulta_G18))) ## Count of how many appearances of each
 #colnames(Multa_G18_vc) <- c("Type", "Appearances")
@@ -231,7 +236,7 @@ dev.off()
 ## Prepare for density plot of first element different from 1
 ## df
 #dens_Multa_G18_fd <- data.frame("x" = density(Multa_G18_fd)$x,
-#		 	       "y" = density(Multa_G18_fd)$y)
+		 	       "y" = density(Multa_G18_fd)$y)
 
 ## cis
 #Multa_G18_fd_quant <- quantile(Multa_G18_fd, probs = c(0.025, 0.5, 0.975))
@@ -252,6 +257,7 @@ dev.off()
 #polygon(x=dens_Multa_G18_fd_ci$x, y=dens_Multa_G18_fd_ci$y, col = "lightblue3", border = NA)
 #polygon(x=dens_Multa_G18_fd$x, y=dens_Multa_G18_fd$y, col = adjustcolor("blue", alpha = 0), border = "black")
 #lines(x = rep(mean(dens_Multa_G18_fd$x),2), y = c(0,dens_Multa_G18_fd$y[which.min(abs(dens_Multa_G18_fd$x - mean(dens_Multa_G18_fd$x)))]), col = "navyblue", lty = 1.5)
+#text(x = 70, y = 0.08, paste0(100-length(Multa_G18_fd)," sims did not change"))
 
 #par(mar = c(1,1,2,1))
 #wordcloud(words = as.character(Multa_G18_vc$Type), freq = Multa_G18_vc$Appearances, scale = c(2,0.5), colors = brewer.pal(8, "Dark2"), random.order = F)
@@ -266,7 +272,7 @@ dev.off()
 
 ## G1b
 
-SI_AtoMultb_G1 <- readRDS("../SI_results/SI_AtoMultb_G1_res.rds")
+SI_AtoMultb_G1 <- readRDS("../SI3_results/SI_AtoMultb_G1_res.rds")
 Multb_G1_fd <- sapply(SI_AtoMultb_G1, function(x) min(which(x != x[1]))) ## First element different from 1
 Multb_G1_dc <- sapply(SI_AtoMultb_G1, function(x) length(unique(x))) ## How many different types 
 Multb_G1_vc <- as.data.frame(table(unlist(SI_AtoMultb_G1))) ## Count of how many appearances of each
@@ -306,7 +312,7 @@ dev.off()
 
 ## G2b
 
-SI_AtoMultb_G2 <- readRDS("../SI_results/SI_AtoMultb_G2_res.rds")
+SI_AtoMultb_G2 <- readRDS("../SI3_results/SI_AtoMultb_G2_res.rds")
 Multb_G2_fd <- sapply(SI_AtoMultb_G2, function(x) min(which(x != x[1]))) ## First element different from 1
 Multb_G2_dc <- sapply(SI_AtoMultb_G2, function(x) length(unique(x))) ## How many different types 
 Multb_G2_vc <- as.data.frame(table(unlist(SI_AtoMultb_G2))) ## Count of how many appearances of each
@@ -346,7 +352,7 @@ dev.off()
 
 ## G9b
 
-SI_AtoMultb_G9 <- readRDS("../SI_results/SI_AtoMultb_G9_res.rds")
+SI_AtoMultb_G9 <- readRDS("../SI3_results/SI_AtoMultb_G9_res.rds")
 Multb_G9_fd <- sapply(SI_AtoMultb_G9, function(x) min(which(x != x[1]))) ## First element different from 1
 Multb_G9_dc <- sapply(SI_AtoMultb_G9, function(x) length(unique(x))) ## How many different types 
 Multb_G9_vc <- as.data.frame(table(unlist(SI_AtoMultb_G9))) ## Count of how many appearances of each
@@ -386,7 +392,7 @@ dev.off()
 
 ## G18b
 
-SI_AtoMultb_G18 <- readRDS("../SI_results/SI_AtoMultb_G18_res.rds")
+SI_AtoMultb_G18 <- readRDS("../SI3_results/SI_AtoMultb_G18_res.rds")
 Multb_G18_fd <- sapply(SI_AtoMultb_G18, function(x) min(which(x != x[1]))) ## First element different from 1
 Multb_G18_dc <- sapply(SI_AtoMultb_G18, function(x) length(unique(x))) ## How many different types 
 Multb_G18_vc <- as.data.frame(table(unlist(SI_AtoMultb_G18))) ## Count of how many appearances of each
@@ -428,7 +434,7 @@ dev.off()
 ################ EXTENDED SIMULATIONS AtoFree
 ## How much does it deviate? Maximum distance to the whole of the morphospace and to the initial shape
 
-SI_Free <- readRDS("../SI_results/SI_Free_res.rds")
+SI_Free <- readRDS("../SI3_results/SI_Free_res.rds")
 
 
 ## Prepare objects for plots
