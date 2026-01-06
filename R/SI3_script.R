@@ -1,4 +1,4 @@
-#####################################################################################
+####################################################################################
 ######## The following SI script includes extended simulations to analyse the model in the paper for <paper name>. It explores the variation in different ways of the four implemented methods
 #####################################################################################
 
@@ -39,7 +39,7 @@ AtoA_max_shapes <- lapply(seq_along(SI_AtoA), function(i) {SI_AtoA[[i]]$Shapes[[
 SI_AtoA_res <- list("indexes" = AtoA_max_div_index,
 		    "max_dist" = AtoA_max_div,
 		    "Shapes" = AtoA_max_shapes)
-saveRDS(SI_AtoA_res, "../SI_results/SI_AtoA_res.rds")
+saveRDS(SI_AtoA_res, "../SI3_results/SI_AtoA_res.rds")
 
 ################ EXTENDED SIMULATIONS AtoB
 ## When do we reach maximum convergence? Need Procrustes distances, time of max convergence, and shapes themselves
@@ -57,7 +57,7 @@ AtoB_min_shapes <- lapply(seq_along(SI_AtoB), function(i) {SI_AtoB[[i]]$Shapes[[
 SI_AtoB_res <- list("indexes" = AtoB_min_div_index,
 		    "min_dist" = AtoB_min_div,
 		    "Shapes" = AtoB_min_shapes)
-saveRDS(SI_AtoB_res, "../SI_results/SI_AtoB_res.rds")
+saveRDS(SI_AtoB_res, "../SI3_results/SI_AtoB_res.rds")
 
 ################ EXTENDED SIMULATIONS AtoMult
 ## When is it a different shape? How many shapes does it go through? And to which shapes does it change? Comparison with and without initial shape in target pool
@@ -85,7 +85,7 @@ for (i in 1:n_iter){
 }
 
 ## Save results
-saveRDS(SI_AtoMulta_G1_shapes, "../SI_results/SI_AtoMulta_G1_res.rds")
+saveRDS(SI_AtoMulta_G1_shapes, "../SI3_results/SI_AtoMulta_G1_res.rds")
 
 #### G2
 
@@ -102,7 +102,7 @@ for (i in 1:n_iter){
 }
 
 ## Save results
-saveRDS(SI_AtoMulta_G2_shapes, "../SI_results/SI_AtoMulta_G2_res.rds")
+saveRDS(SI_AtoMulta_G2_shapes, "../SI3_results/SI_AtoMulta_G2_res.rds")
 
 #### G9
 
@@ -119,7 +119,7 @@ for (i in 1:n_iter){
 }
 
 ## Save results
-saveRDS(SI_AtoMulta_G9_shapes, "../SI_results/SI_AtoMulta_G9_res.rds")
+saveRDS(SI_AtoMulta_G9_shapes, "../SI3_results/SI_AtoMulta_G9_res.rds")
 
 #### G18
 ## Increased e so the sim does not crash
@@ -136,7 +136,7 @@ for (i in 1:n_iter){
 }
 
 ## Save results
-saveRDS(SI_AtoMulta_G18_shapes, "../SI_results/SI_AtoMulta_G18_res.rds")
+saveRDS(SI_AtoMulta_G18_shapes, "../SI3_results/SI_AtoMulta_G18_res.rds")
 
 ### AtoMultb. Don't include initial shape in target pool
 
@@ -162,7 +162,7 @@ for (i in 1:n_iter){
 }
 
 ## Save results
-saveRDS(SI_AtoMultb_G1_shapes, "../SI_results/SI_AtoMultb_G1_res.rds")
+saveRDS(SI_AtoMultb_G1_shapes, "../SI3_results/SI_AtoMultb_G1_res.rds")
 
 #### G2
 target_names <- rownames(amp_pha_mat)[!grepl("G2",rownames(amp_pha_mat))]
@@ -181,7 +181,7 @@ for (i in 1:n_iter){
 }
 
 ## Save results
-saveRDS(SI_AtoMultb_G2_shapes, "../SI_results/SI_AtoMultb_G2_res.rds")
+saveRDS(SI_AtoMultb_G2_shapes, "../SI3_results/SI_AtoMultb_G2_res.rds")
 
 #### G9
 target_names <- rownames(amp_pha_mat)[!grepl("G9",rownames(amp_pha_mat))]
@@ -204,7 +204,7 @@ for (i in 1:n_iter){
 }
 
 ## Save results
-saveRDS(SI_AtoMultb_G9_shapes, "../SI_results/SI_AtoMultb_G9_res.rds")
+saveRDS(SI_AtoMultb_G9_shapes, "../SI3_results/SI_AtoMultb_G9_res.rds")
 
 #### G18
 target_names <- rownames(amp_pha_mat)[!grepl("G18",rownames(amp_pha_mat))]
@@ -227,7 +227,7 @@ for (i in 1:n_iter){
 }
 
 ## Save results
-saveRDS(SI_AtoMultb_G18_shapes, "../SI_results/SI_AtoMultb_G18_res.rds")
+saveRDS(SI_AtoMultb_G18_shapes, "../SI3_results/SI_AtoMultb_G18_res.rds")
 
 ################ EXTENDED SIMULATIONS AtoFree
 ## How much does it deviate? Maximum distance to the whole of the morphospace and to the initial shape
@@ -280,4 +280,4 @@ SI_Free_res <- list("indexes" = Free_max_div_index,
 		    "Shapes" = Free_max_shapes,
 		    "Dists_to_morph" = dists_to_morph)
 
-saveRDS(SI_Free_res, "../SI_results/SI_Free_res.rds")
+saveRDS(SI_Free_res, "../SI3_results/SI_Free_res.rds")
