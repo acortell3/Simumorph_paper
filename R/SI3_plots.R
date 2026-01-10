@@ -38,12 +38,14 @@ plot(x=dens_AtoA_mdi$x, y=dens_AtoA_mdi$y, xlab = "Timestep of max divergence", 
 polygon(x=dens_AtoA_mdi$x, y=dens_AtoA_mdi$y, col = "lightblue1", border = NA)
 polygon(x=dens_AtoA_mdi_ci$x, y=dens_AtoA_mdi_ci$y, col = "lightblue3", border = NA)
 polygon(x=dens_AtoA_mdi$x, y=dens_AtoA_mdi$y, col = adjustcolor("blue", alpha = 0), border = "black")
-lines(x = rep(mean(dens_AtoA_mdi$x),2), y = c(0,dens_AtoA_mdi$y[which.min(abs(dens_AtoA_mdi$x - mean(dens_AtoA_mdi$x)))]), col = "navyblue", lty = 1.5)
+abline(v = mean(AtoA_mdi), lty = 2, col = "navyblue")
+abline(v = median(AtoA_mdi), lty = 2, col = "red")
 plot(x=dens_AtoA_md$x, y = dens_AtoA_md$y, xlab = "Max Procrustes distance", col = "blue", lwd = 1.5, main = "Max Procrustes distance (AtoA)", type = "l", ylab = "value")
 polygon(x=dens_AtoA_md$x, y=dens_AtoA_md$y, col = "lightblue1", border = NA)
 polygon(x=dens_AtoA_md_ci$x, y=dens_AtoA_md_ci$y, col = "lightblue3", border = NA)
 polygon(x=dens_AtoA_md$x, y=dens_AtoA_md$y, col = adjustcolor("blue", alpha = 0), border = "black")
-lines(x = rep(mean(dens_AtoA_md$x),2), y = c(0,dens_AtoA_md$y[which.min(abs(dens_AtoA_md$x - mean(dens_AtoA_md$x)))]), col = "navyblue", lty = 1.5)
+abline(v = mean(AtoA_md), lty = 2, col = "navyblue")
+abline(v = median(AtoA_md), lty = 2, col = "red")
 
 dev.off()
 
@@ -83,12 +85,14 @@ plot(x=dens_AtoB_mdi$x, y=dens_AtoB_mdi$y, xlab = "Timestep of max convergence",
 polygon(x=dens_AtoB_mdi$x, y=dens_AtoB_mdi$y, col = "lightblue1", border = NA)
 polygon(x=dens_AtoB_mdi_ci$x, y=dens_AtoB_mdi_ci$y, col = "lightblue3", border = NA)
 polygon(x=dens_AtoB_mdi$x, y=dens_AtoB_mdi$y, col = adjustcolor("blue", alpha = 0), border = "black")
-lines(x = rep(mean(dens_AtoB_mdi$x),2), y = c(0,dens_AtoB_mdi$y[which.min(abs(dens_AtoB_mdi$x - mean(dens_AtoB_mdi$x)))]), col = "navyblue", lty = 1.5)
+abline(v = mean(AtoB_mdi), lty = 2, col = "navyblue")
+abline(v = median(AtoB_mdi), lty = 2, col = "red")
 plot(x=dens_AtoB_md$x, y = dens_AtoB_md$y, xlab = "Max convergence distance", col = "blue", lwd = 1.5, main = "Min Procrustes distance (AtoB)", type = "l", ylab = "value")
 polygon(x=dens_AtoB_md$x, y=dens_AtoB_md$y, col = "lightblue1", border = NA)
 polygon(x=dens_AtoB_md_ci$x, y=dens_AtoB_md_ci$y, col = "lightblue3", border = NA)
 polygon(x=dens_AtoB_md$x, y=dens_AtoB_md$y, col = adjustcolor("blue", alpha = 0), border = "black")
-lines(x = rep(mean(dens_AtoB_md$x),2), y = c(0,dens_AtoB_md$y[which.min(abs(dens_AtoB_md$x - mean(dens_AtoB_md$x)))]), col = "navyblue", lty = 1.5)
+abline(v = mean(AtoB_md), lty = 2, col = "navyblue")
+abline(v = median(AtoB_md), lty = 2, col = "red")
 
 dev.off()
 
@@ -130,7 +134,8 @@ plot(x=dens_Multa_G1_fd$x, y=dens_Multa_G1_fd$y, xlab = "Timestep to first diffe
 polygon(x=dens_Multa_G1_fd$x, y=dens_Multa_G1_fd$y, col = "lightblue1", border = NA)
 polygon(x=dens_Multa_G1_fd_ci$x, y=dens_Multa_G1_fd_ci$y, col = "lightblue3", border = NA)
 polygon(x=dens_Multa_G1_fd$x, y=dens_Multa_G1_fd$y, col = adjustcolor("blue", alpha = 0), border = "black")
-lines(x = rep(mean(dens_Multa_G1_fd$x),2), y = c(0,dens_Multa_G1_fd$y[which.min(abs(dens_Multa_G1_fd$x - mean(dens_Multa_G1_fd$x)))]), col = "navyblue", lty = 1.5)
+abline(v = mean(Multa_G1_fd), lty = 2, col = "navyblue")
+abline(v = median(Multa_G1_fd), lty = 2, col = "red")
 
 wordcloud(words = as.character(Multa_G1_vc$Type), freq = Multa_G1_vc$Appearances, scale = c(2,0.5), colors = brewer.pal(8, "Dark2"), random.order = T)
 title("Type frequency")
@@ -170,7 +175,8 @@ plot(x=dens_Multa_G2_fd$x, y=dens_Multa_G2_fd$y, xlab = "Timestep to first diffe
 polygon(x=dens_Multa_G2_fd$x, y=dens_Multa_G2_fd$y, col = "lightblue1", border = NA)
 polygon(x=dens_Multa_G2_fd_ci$x, y=dens_Multa_G2_fd_ci$y, col = "lightblue3", border = NA)
 polygon(x=dens_Multa_G2_fd$x, y=dens_Multa_G2_fd$y, col = adjustcolor("blue", alpha = 0), border = "black")
-lines(x = rep(mean(dens_Multa_G2_fd$x),2), y = c(0,dens_Multa_G2_fd$y[which.min(abs(dens_Multa_G2_fd$x - mean(dens_Multa_G2_fd$x)))]), col = "navyblue", lty = 1.5)
+abline(v = mean(Multa_G2_fd), lty = 2, col = "navyblue")
+abline(v = median(Multa_G2_fd), lty = 2, col = "red")
 
 wordcloud(words = as.character(Multa_G2_vc$Type), freq = Multa_G2_vc$Appearances, scale = c(2,0.5), colors = brewer.pal(8, "Dark2"), random.order = T)
 title("Type frequency")
@@ -212,7 +218,8 @@ plot(x=dens_Multa_G9_fd$x, y=dens_Multa_G9_fd$y, xlab = "Timestep to first diffe
 polygon(x=dens_Multa_G9_fd$x, y=dens_Multa_G9_fd$y, col = "lightblue1", border = NA)
 polygon(x=dens_Multa_G9_fd_ci$x, y=dens_Multa_G9_fd_ci$y, col = "lightblue3", border = NA)
 polygon(x=dens_Multa_G9_fd$x, y=dens_Multa_G9_fd$y, col = adjustcolor("blue", alpha = 0), border = "black")
-lines(x = rep(mean(dens_Multa_G9_fd$x),2), y = c(0,dens_Multa_G9_fd$y[which.min(abs(dens_Multa_G9_fd$x - mean(dens_Multa_G9_fd$x)))]), col = "navyblue", lty = 1.5)
+abline(v = mean(Multa_G9_fd), lty = 2, col = "navyblue")
+abline(v = median(Multa_G9_fd), lty = 2, col = "red")
 text(x = 70, y = 0.08, paste0(100-length(Multa_G9_fd)," sims did not change"))
 
 wordcloud(words = as.character(Multa_G9_vc$Type), freq = Multa_G9_vc$Appearances, scale = c(2,0.5), colors = brewer.pal(8, "Dark2"), random.order = T)
@@ -302,7 +309,8 @@ plot(x=dens_Multb_G1_fd$x, y=dens_Multb_G1_fd$y, xlab = "Timestep to first diffe
 polygon(x=dens_Multb_G1_fd$x, y=dens_Multb_G1_fd$y, col = "lightblue1", border = NA)
 polygon(x=dens_Multb_G1_fd_ci$x, y=dens_Multb_G1_fd_ci$y, col = "lightblue3", border = NA)
 polygon(x=dens_Multb_G1_fd$x, y=dens_Multb_G1_fd$y, col = adjustcolor("blue", alpha = 0), border = "black")
-lines(x = rep(mean(dens_Multb_G1_fd$x),2), y = c(0,dens_Multb_G1_fd$y[which.min(abs(dens_Multb_G1_fd$x - mean(dens_Multb_G1_fd$x)))]), col = "navyblue", lty = 1.5)
+abline(v = mean(Multb_G1_fd), lty = 2, col = "navyblue")
+abline(v = median(Multb_G1_fd), lty = 2, col = "red")
 
 wordcloud(words = as.character(Multb_G1_vc$Type), freq = Multb_G1_vc$Appearances, scale = c(2,0.5), colors = brewer.pal(8, "Dark2"), random.order = T)
 title("Type frequency")
@@ -342,7 +350,8 @@ plot(x=dens_Multb_G2_fd$x, y=dens_Multb_G2_fd$y, xlab = "Timestep to first diffe
 polygon(x=dens_Multb_G2_fd$x, y=dens_Multb_G2_fd$y, col = "lightblue1", border = NA)
 polygon(x=dens_Multb_G2_fd_ci$x, y=dens_Multb_G2_fd_ci$y, col = "lightblue3", border = NA)
 polygon(x=dens_Multb_G2_fd$x, y=dens_Multb_G2_fd$y, col = adjustcolor("blue", alpha = 0), border = "black")
-lines(x = rep(mean(dens_Multb_G2_fd$x),2), y = c(0,dens_Multb_G2_fd$y[which.min(abs(dens_Multb_G2_fd$x - mean(dens_Multb_G2_fd$x)))]), col = "navyblue", lty = 1.5)
+abline(v = mean(Multb_G2_fd), lty = 2, col = "navyblue")
+abline(v = median(Multb_G2_fd), lty = 2, col = "red")
 
 wordcloud(words = as.character(Multb_G2_vc$Type), freq = Multb_G2_vc$Appearances, scale = c(2,0.5), colors = brewer.pal(8, "Dark2"), random.order = T)
 title("Type frequency")
@@ -382,12 +391,13 @@ plot(x=dens_Multb_G9_fd$x, y=dens_Multb_G9_fd$y, xlab = "Timestep to first diffe
 polygon(x=dens_Multb_G9_fd$x, y=dens_Multb_G9_fd$y, col = "lightblue1", border = NA)
 polygon(x=dens_Multb_G9_fd_ci$x, y=dens_Multb_G9_fd_ci$y, col = "lightblue3", border = NA)
 polygon(x=dens_Multb_G9_fd$x, y=dens_Multb_G9_fd$y, col = adjustcolor("blue", alpha = 0), border = "black")
-lines(x = rep(mean(dens_Multb_G9_fd$x),2), y = c(0,dens_Multb_G9_fd$y[which.min(abs(dens_Multb_G9_fd$x - mean(dens_Multb_G9_fd$x)))]), col = "navyblue", lty = 1.5)
+abline(v = mean(Multb_G9_fd), lty = 2, col = "navyblue")
+abline(v = median(Multb_G9_fd), lty = 2, col = "red")
 
 wordcloud(words = as.character(Multb_G9_vc$Type), freq = Multb_G9_vc$Appearances, scale = c(2,0.5), colors = brewer.pal(8, "Dark2"), random.order = T)
 title("Type frequency")
 
-barplot(Multb_G9_vc$Appearances, names.arg = xlab_n, las = 2, col = "gold4", main = "Types present in the simulation", cex.names = 0.6)
+barplot(Multb_G9_vc$Appearances, names.arg = xlab_n, las = 2, col = "gold4", main = "Types present in the simulation", cex.names = 0.4)
 dev.off()
 
 ## G18b
@@ -422,12 +432,13 @@ plot(x=dens_Multb_G18_fd$x, y=dens_Multb_G18_fd$y, xlab = "Timestep to first dif
 polygon(x=dens_Multb_G18_fd$x, y=dens_Multb_G18_fd$y, col = "lightblue1", border = NA)
 polygon(x=dens_Multb_G18_fd_ci$x, y=dens_Multb_G18_fd_ci$y, col = "lightblue3", border = NA)
 polygon(x=dens_Multb_G18_fd$x, y=dens_Multb_G18_fd$y, col = adjustcolor("blue", alpha = 0), border = "black")
-lines(x = rep(mean(dens_Multb_G18_fd$x),2), y = c(0,dens_Multb_G18_fd$y[which.min(abs(dens_Multb_G18_fd$x - mean(dens_Multb_G18_fd$x)))]), col = "navyblue", lty = 1.5)
+abline(v = mean(Multb_G18_fd), lty = 2, col = "navyblue")
+abline(v = median(Multb_G18_fd), lty = 2, col = "red")
 
 wordcloud(words = as.character(Multb_G18_vc$Type), freq = Multb_G18_vc$Appearances, scale = c(2,0.5), colors = brewer.pal(8, "Dark2"), random.order = T)
 title("Type frequency")
 
-barplot(Multb_G18_vc$Appearances, names.arg = xlab_n, las = 2, col = "gold4", main = "Types present in the simulation", cex.names = 0.6)
+barplot(Multb_G18_vc$Appearances, names.arg = xlab_n, las = 2, col = "gold4", main = "Types present in the simulation", cex.names = 0.4)
 dev.off()
 
 
@@ -485,12 +496,14 @@ plot(x=dens_Free_max$x, y=dens_Free_max$y, xlab = "Timestep of max divergence", 
 polygon(x=dens_Free_max$x, y=dens_Free_max$y, col = "lightblue1", border = NA)
 polygon(x=dens_Free_max_ci$x, y=dens_Free_max_ci$y, col = "lightblue3", border = NA)
 polygon(x=dens_Free_max$x, y=dens_Free_max$y, col = adjustcolor("blue", alpha = 0), border = "black")
-lines(x = rep(mean(dens_Free_max$x),2), y = c(0,dens_Free_max$y[which.min(abs(dens_Free_max$x - mean(dens_Free_max$x)))]), col = "navyblue", lty = 1.5)
+abline(v = mean(SI_Free$Dists_to_morph[,2]), lty = 2, col = "navyblue")
+abline(v = median(SI_Free$Dists_to_morph[,2]), lty = 2, col = "red")
 plot(x=dens_Free_min$x, y = dens_Free_min$y, xlab = "Timestep of first divergence", col = "blue", lwd = 1.5, main = "First divergence Free simulation", type = "l", ylab = "value")
 polygon(x=dens_Free_min$x, y=dens_Free_min$y, col = "lightblue1", border = NA)
 polygon(x=dens_Free_min_ci$x, y=dens_Free_min_ci$y, col = "lightblue3", border = NA)
 polygon(x=dens_Free_min$x, y=dens_Free_min$y, col = adjustcolor("blue", alpha = 0), border = "black")
-lines(x = rep(mean(dens_Free_min$x),2), y = c(0,dens_Free_min$y[which.min(abs(dens_Free_min$x - mean(dens_Free_min$x)))]), col = "navyblue", lty = 1.5)
+abline(v = mean(SI_Free$Dists_to_morph[,5]), lty = 2, col = "navyblue")
+abline(v = median(SI_Free$Dists_to_morph[,5]), lty = 2, col = "red")
 
 ## Procrustes distances
 
@@ -498,11 +511,13 @@ plot(x=dens_Free_max_pd$x, y=dens_Free_max_pd$y, xlab = "Maximum Procrustes dist
 polygon(x=dens_Free_max_pd$x, y=dens_Free_max_pd$y, col = "lightblue1", border = NA)
 polygon(x=dens_Free_max_pd_ci$x, y=dens_Free_max_pd_ci$y, col = "lightblue3", border = NA)
 polygon(x=dens_Free_max_pd$x, y=dens_Free_max_pd$y, col = adjustcolor("blue", alpha = 0), border = "black")
-lines(x = rep(mean(dens_Free_max_pd$x),2), y = c(0,dens_Free_max_pd$y[which.min(abs(dens_Free_max_pd$x - mean(dens_Free_max_pd$x)))]), col = "navyblue", lty = 1.5)
+abline(v = mean(SI_Free$Dists_to_morph[,1]), lty = 2, col = "navyblue")
+abline(v = median(SI_Free$Dists_to_morph[,1]), lty = 2, col = "red")
 plot(x=dens_Free_min_pd$x, y = dens_Free_min_pd$y, xlab = "Minimum Procrustes distance", col = "blue", lwd = 1.5, main = "Min distance to morphospace Free", type = "l", ylab = "value")
 polygon(x=dens_Free_min_pd$x, y=dens_Free_min_pd$y, col = "lightblue1", border = NA)
 polygon(x=dens_Free_min_pd_ci$x, y=dens_Free_min_pd_ci$y, col = "lightblue3", border = NA)
 polygon(x=dens_Free_min_pd$x, y=dens_Free_min_pd$y, col = adjustcolor("blue", alpha = 0), border = "black")
-lines(x = rep(mean(dens_Free_min_pd$x),2), y = c(0,dens_Free_min_pd$y[which.min(abs(dens_Free_min_pd$x - mean(dens_Free_min_pd$x)))]), col = "navyblue", lty = 1.5)
+abline(v = mean(SI_Free$Dists_to_morph[,4]), lty = 2, col = "navyblue")
+abline(v = median(SI_Free$Dists_to_morph[,4]), lty = 2, col = "red")
 
 dev.off()
