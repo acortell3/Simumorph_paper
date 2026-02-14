@@ -5,7 +5,7 @@
 ####################################################################################
 
 ####################################################################################
-######## The following SI script includes extended simulations to analyse the model in the paper for <paper name>. It explores the variation in different ways of the four implemented methods
+######## The following SI script includes extended simulations to analyse the model. It explores the variation in different ways of the four implemented methods
 #####################################################################################
 
 ## Load libraries and data
