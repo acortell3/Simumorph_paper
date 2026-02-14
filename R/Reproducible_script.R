@@ -2,7 +2,7 @@
 
 ###################################################################################
 ###################################################################################
-## Reproducible script for Cortell-Nicolau, A., Kandler, A., 'name of the paper', Journal of Archaeological Method and Theory
+## Reproducible script for Cortell-Nicolau, A., Kandler, A., 'Simulating shape variation in material culture: The Simumorph R-package', Journal of Archaeological Method and Theory
 ####################################################################################
 ####################################################################################
 
