@@ -1,4 +1,10 @@
 
+###################################################################################
+###################################################################################
+## Scripts for Cortell-Nicolau, A., Kandler, A., 'Simulating shape variation in material culture: The Simumorph R-package', Journal of Archaeological Method and Theory
+####################################################################################
+####################################################################################
+
 #####################################################################################
 ######## The following SI script includes the plots for the additional SI figures for <paper name>. It explores the variation in different ways of the four implemented methods
 #####################################################################################
