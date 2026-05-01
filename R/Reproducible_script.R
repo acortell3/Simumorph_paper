@@ -258,7 +258,7 @@ c_f <- 50
 
 AtoMult_G1_SI <- simumorph(x = amp_pha_cov, m.space = amp_pha_mat, init = which(rownames(amp_pha_mat) == "G1.1_m_G1.1"), target = targets_multi, method = "AtoMult", sim = sims, npts = npts, only.shapes = F, a = c_a, e = 0.05, f = c_f)
 
-## Create vector with minimum procrustes distances and their 
+## Create vector with minimum procrustes distances and their distances
 pdist_G1_SI <- data.frame("target" = character(),
 	        	  "distance" = numeric())
 
@@ -365,7 +365,7 @@ for (i in 1:sims){
 }
 plot(pdist_G18_SI$distance, type = "l", lwd = 3, cex.main = 2, cex.lab = 2.2, mgp = c(1.8,0.7,0), col = "slategrey", main = "Procrustes distances", xlab = "Time", ylab = "Dist", bty = "n")
 dev.off()
-###################################################################################
+######################################################################a#############
 
 
 
