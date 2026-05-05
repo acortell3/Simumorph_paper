@@ -80,13 +80,11 @@ AtoA_par_sens <- function(i){
 }
 
 AtoA_res <- mclapply(1:sims,AtoA_par_sens,mc.cores = detectCores() - 2)
-saveRDS(AtoA_res, "../Sens_results/AtoA_res_debug.rds")
-#readRDS("../Sens_results/AtoA_res_debug.rds")
-#AtoA_sens_df <- do.call(rbind,lapply(AtoA_res, function(x) x$df))
-#AtoA_sens_full <- unlist(lapply(AtoA_res, function(x) x$full),recursive = FALSE)
+AtoA_sens_df <- do.call(rbind,lapply(AtoA_res, function(x) x$df))
+AtoA_sens_full <- unlist(lapply(AtoA_res, function(x) x$full),recursive = FALSE)
 
-#saveRDS(AtoA_sens_df,"../Sens_results/AtoA_sens_df.rds")
-#saveRDS(AtoA_sens_full,"../Sens_results/AtoA_sens_full.rds")
+saveRDS(AtoA_sens_df,"../Sens_results/AtoA_sens_df.rds")
+saveRDS(AtoA_sens_full,"../Sens_results/AtoA_sens_full.rds")
 
 ### AtoB
 ## What is the maximum P_d achieved depending on the parameters?
@@ -142,13 +140,11 @@ AtoB_par_sens <- function(i){
 }
 
 AtoB_res <- mclapply(1:sims,AtoB_par_sens,mc.cores = detectCores() - 2)
-saveRDS(AtoB_res, "../Sens_results/AtoB_res_debug.rds")
-#readRDS("../Sens_results/AtoB_res_debug.rds")
-#AtoB_sens_df <- do.call(rbind,lapply(AtoB_res, function(x) x$df))
-#AtoB_sens_full <- unlist(lapply(AtoB_res, function(x) x$full),recursive = FALSE)
+AtoB_sens_df <- do.call(rbind,lapply(AtoB_res, function(x) x$df))
+AtoB_sens_full <- unlist(lapply(AtoB_res, function(x) x$full),recursive = FALSE)
 
-#saveRDS(AtoB_sens_df,"../Sens_results/AtoB_sens_df.rds")
-#saveRDS(AtoB_sens_full,"../Sens_results/AtoB_sens_full.rds")
+saveRDS(AtoB_sens_df,"../Sens_results/AtoB_sens_df.rds")
+saveRDS(AtoB_sens_full,"../Sens_results/AtoB_sens_full.rds")
 
 ### AtoMult
 ## What is the maximum P_d achieved depending on the parameters?
@@ -210,13 +206,11 @@ AtoMult_par_sens <- function(i){
 }
 
 AtoMult_res <- mclapply(1:sims,AtoMult_par_sens,mc.cores = detectCores() - 2)
-saveRDS(AtoMult_res, "../Sens_results/AtoMult_res_debug.rds")
-#readRDS("../Sens_results/AtoMult_res_debug.rds")
-#AtoMult_sens_df <- do.call(rbind,lapply(AtoMult_res, function(x) x$df))
-#AtoMult_sens_full <- unlist(lapply(AtoMult_res, function(x) x$full),recursive = FALSE)
+AtoMult_sens_df <- do.call(rbind,lapply(AtoMult_res, function(x) x$df))
+AtoMult_sens_full <- unlist(lapply(AtoMult_res, function(x) x$full),recursive = FALSE)
 
-#saveRDS(AtoMult_sens_df,"../Sens_results/AtoMult_sens_df.rds")
-#saveRDS(AtoMult_sens_full,"../Sens_results/AtoMult_sens_full.rds")
+saveRDS(AtoMult_sens_df,"../Sens_results/AtoMult_sens_df.rds")
+saveRDS(AtoMult_sens_full,"../Sens_results/AtoMult_sens_full.rds")
 
 
 ### Free
@@ -275,12 +269,10 @@ Free_par_sens <- function(i){
 }
 
 Free_res <- mclapply(1:sims,Free_par_sens,mc.cores = detectCores() - 2)
-saveRDS(Free_res, "../Sens_results/Free_res_debug.rds")
-#readRDS("../Sens_results/Free_res_debug.rds")
-#Free_sens_df <- do.call(rbind,lapply(Free_res, function(x) x$df))
-#Free_sens_full <- unlist(lapply(Free_res, function(x) x$full),recursive = FALSE)
+Free_sens_df <- do.call(rbind,lapply(Free_res, function(x) x$df))
+Free_sens_full <- unlist(lapply(Free_res, function(x) x$full),recursive = FALSE)
 
-#saveRDS(Free_sens_df,"../Sens_results/Free_sens_df.rds")
-#saveRDS(Free_sens_full,"../Sens_results/Free_sens_full.rds")
+saveRDS(Free_sens_df,"../Sens_results/Free_sens_df.rds")
+saveRDS(Free_sens_full,"../Sens_results/Free_sens_full.rds")
 
 
