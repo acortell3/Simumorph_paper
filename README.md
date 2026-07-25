@@ -25,7 +25,7 @@ To fully reproduce the article, the different scripts must be run in the order s
 Additional information can be found at the dedicated Simumorph github [here](https://github.com/acortell3/Simumorph). 
 
 ## Additional safety
-This folder has also been saved as a zenodo file [here](https://zenodo.org/records/215681179, to preserve the exact content of the paper.
+This folder has also been saved as a zenodo file [here](https://zenodo.org/records/215681179), to preserve the exact content of the paper.
 
 ## Wrap up
 And I guess that's all you need to know, but please do reach out if you have any doubt on how to implement this!
